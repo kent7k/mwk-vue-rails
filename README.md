@@ -1,5 +1,6 @@
 # Meetwithkids
-#### リンク：https://meetwithkids.org/
+#### リンク：https://meetwithkids.org/（８月１３日配信停止しました）
+#### Qiita：ゼロからAWS/Terraform/Nuxt.js/Rubyを学習し始めると、ポートフォリオのリリースまでにどのような過程を踏むことになるのか？（https://qiita.com/wonderglot/items/cf0d4faa77b925960802）
 
 ## 概要
 <b>子どもたちのネットワークに異年齢間の交友関係を作り出したい</b>という思いで制作。<br><br>
