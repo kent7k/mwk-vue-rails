@@ -20,6 +20,8 @@ env:
   APP_IMAGE_CACHE_TAG: rails6api-development-cache
   IMAGE_CACHE_DIR: /tmp/cache/docker-image
   IMAGE_CACHE_KEY: cache-image
+  MYSQL_ALLOW_EMPTY_PASSWORD: $ {{ secrets.MYSQL_ALLOW_EMPTY_PASSWORD }}
+
 
 
 jobs:
@@ -53,7 +55,7 @@ jobs:
 
       - name: Docker build
         id: docker-build
-        run: docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1 base
+        run: echo $ {{ secrets.MYSQL_ALLOW_EMPTY_PASSWORD }} && docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1 base
 
       - name: Docker tag and save
         id: docker-tag-save
