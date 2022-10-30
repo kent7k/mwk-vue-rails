@@ -159,3 +159,4 @@ jobs:
           -v ${TRIVY_CACHE_DIR}:/root/.cache/
           aquasec/trivy
           ${APP_IMAGE_CACHE_TAG}
+
