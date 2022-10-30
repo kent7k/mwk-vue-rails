@@ -44,7 +44,7 @@ export default {
     return {
       dialog: false,
       dialogComponent: false,
-      defaultImage: 'http://localhost:5000/fallback/default.png',
+      defaultImage: 'http://localhost:5050/fallback/default.png',
       tab: null,
     }
   },

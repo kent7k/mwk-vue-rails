@@ -39,7 +39,7 @@
           </template>
         </h1>
       </v-card-title>
-      <!-- 
+      <!--
       <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
         <v-tab v-for="(item, index) in items" :key="`first-${index}`">
           {{ item.title }}
@@ -54,7 +54,7 @@
           <v-icon color="pink">mdi-run</v-icon>
         </v-tab>
 
-        <!-- 
+        <!--
         <v-tab>
           follow
         </v-tab>
@@ -83,7 +83,7 @@
           </v-card>
         </v-tab-item>
 
-        <!-- 
+        <!--
         <v-tab-item>
           <v-card>
             <v-card-text>
@@ -132,7 +132,7 @@ export default {
   data() {
     return {
       dialog: false,
-      defaultImage: 'http://localhost:5000/fallback/default.png',
+      defaultImage: 'http://localhost:5050/fallback/default.png',
       tab: null,
     }
   },

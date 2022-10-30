@@ -167,7 +167,7 @@ export default {
   data() {
     return {
       dialog: false,
-      defaultImage: 'http://localhost:5000/fallback/default.png',
+      defaultImage: 'http://localhost:5050/fallback/default.png',
       tab: null,
       items: [
         {
