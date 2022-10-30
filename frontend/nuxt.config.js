@@ -1,21 +1,14 @@
 import colors from 'vuetify/es5/util/colors'
-/* ==========Weather========== */
+
 require('dotenv').config()
-const { WEATHER_API_KEY } = process.env
 const { RAILS_GUEST_ADDRESS } = process.env
 const { RAILS_GUEST_KEY } = process.env
 const { BASE_URL } = process.env
 
-/* ==================== */
-
 export default {
   ssr: false,
   /* mode: 'spa', */
-  /*
-   ** Headers of the page
-   */
   env: {
-    WEATHER_API_KEY,
     RAILS_GUEST_ADDRESS,
     RAILS_GUEST_KEY,
     BASE_URL,
@@ -43,9 +36,6 @@ export default {
    ** Global CSS
    */
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
   plugins: [
     { src: '~/plugins/axios.js', ssr: false },
     { src: '~/plugins/dayjs', ssr: false },
@@ -55,9 +45,6 @@ export default {
    ** Nuxt.js dev-modules
    */
   buildModules: ['@nuxtjs/vuetify', '@nuxt/typescript-build'],
-  /*
-   ** Nuxt.js modules
-   */
   modules: [
     // '@nuxtjs/proxy',
     '@nuxtjs/axios',
@@ -130,13 +117,7 @@ export default {
       },
     },
   },
-  /*
-   ** Build configuration
-   */
   build: {},
-
-  /* ================ */
-
   //   router: {
   //   middleware: ['auth']
   // }

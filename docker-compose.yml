@@ -67,7 +67,7 @@ services:
 # node_modulesはホストと共有しないでvolumeマウント
 
     ports:
-       - "3000:80"
+       - "3000:3000"
 #      - "$FRONT_PORT:$CONTAINER_PORT"
 #    networks:
 #      app_net:
