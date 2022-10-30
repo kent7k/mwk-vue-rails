@@ -13,7 +13,7 @@ CarrierWave.configure do |config|
       region: 'ap-northeast-1'
     }
   else
-    config.asset_host = 'http://localhost:5000'
+    config.asset_host = 'http://localhost:5050'
     config.cache_storage = :file
   end
 end
