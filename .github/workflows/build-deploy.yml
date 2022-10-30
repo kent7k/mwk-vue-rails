@@ -1,0 +1,30 @@
+---
+name: Build & Deploy to Amazon ECS
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  image-cache-or-build:
+    strategy:
+      matrix:
+        ruby: ["2.7.1"]
+        os: [ubuntu-18.04]
+    runs-on: ${{ matrix.os }}
+    env:
+      ARG_RUBY_VERSION: ${{ matrix.ruby }}
+
+    steps:
+      - name: Check out code
+        id: checkout
+        uses: actions/checkout@v2
+
+      - name: Cache docker image
+        id: cache-docker-image
+        uses: actions/cache@v1
+        with:
+          path: ${{ env.IMAGE_CACHE_DIR }}
+          key: ${{ runner.os }}-${{ env.IMAGE_CACHE_KEY }}-${{ matrix.ruby }}-${{ hashFiles('Dockerfile') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ env.IMAGE_CACHE_KEY }}-${{ matrix.ruby }}-
