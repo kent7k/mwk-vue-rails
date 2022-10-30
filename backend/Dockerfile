@@ -1,4 +1,4 @@
-FROM ruby:2.7.1-alpine3.10
+FROM ruby:2.7.1-alpine3.11
 
 ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata mysql-dev mariadb-client yarn" \
     DEV_PACKAGES="build-base curl-dev" \
@@ -30,3 +30,7 @@ RUN bundle install
 
 ADD . /app
 CMD ["rails", "server", "-b", "0.0.0.0"]
+
+ARG ARG_COMPOSE_WAIT_VER=2.7.3
+RUN curl -SL https://github.com/ufoscout/docker-compose-wait/releases/download/${ARG_COMPOSE_WAIT_VER}/wait -o /wait
+RUN chmod +x /wait
