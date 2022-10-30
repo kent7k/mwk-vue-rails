@@ -9,13 +9,14 @@ RUN mkdir /app
 WORKDIR /app
 
 ADD Gemfile /app/Gemfile
-#ADD Gemfile.lock /app/Gemfile.lock
+ADD Gemfile.lock /app/Gemfile.lock
 
 RUN apk update && \
     apk upgrade && \
     apk add --update --no-cache ${RUNTIME_PACKAGES} && \
     apk add --update --virtual build-dependencies --no-cache ${DEV_PACKAGES} && \
     bundle install -j4 && \
+    bundle config set force_ruby_platform true && \
     apk del build-dependencies && \
     rm -rf /usr/local/bundle/cache/* \
     /usr/local/share/.cache/* \
@@ -24,4 +25,8 @@ RUN apk update && \
     /usr/lib/mysqld* \
     /usr/bin/mysql*
 
+RUN gem install bundler
+RUN bundle install
+
 ADD . /app
+CMD ["rails", "server", "-b", "0.0.0.0"]
