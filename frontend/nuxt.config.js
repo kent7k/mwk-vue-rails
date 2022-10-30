@@ -73,7 +73,7 @@ export default {
   //     }
   //   },
   // '/api': {
-  //   target: 'http://localhost:5000',
+  //   target: 'http://localhost:5050',
   //   // pathRewrite: {
   //   //   '^/api': '/api'
   //   // }
@@ -82,8 +82,8 @@ export default {
     baseURL:
       process.env.NODE_ENV === 'production'
         ? 'https://rinrei720.com'
-        : 'http://localhost:5000',
-    // baseURL: process.env.NODE_ENV === "production" ? "https://meetwithkids.org" : "http://localhost:5000"
+        : 'http://localhost:5050',
+    // baseURL: process.env.NODE_ENV === "production" ? "https://meetwithkids.org" : "http://localhost:5050"
     // baseURL: "https://meetwithkids.org",
     // baseURL: "https://backend.meetwithkids.org",
     // baseURL: process.env.BASE_URL,
