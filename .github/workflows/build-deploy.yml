@@ -21,8 +21,10 @@ env:
   IMAGE_CACHE_DIR: /tmp/cache/docker-image
   IMAGE_CACHE_KEY: cache-image
   MYSQL_ALLOW_EMPTY_PASSWORD: $ {{ secrets.MYSQL_ALLOW_EMPTY_PASSWORD }}
-
-
+  MYSQL_ROOT_PASSWORD: $ {{ secrets.MYSQL_ROOT_PASSWORD }}
+  WORKDIR: $ {{ secrets.WORKDIR }}
+  CONTAINER_PORT: $ {{ secrets.CONTAINER_PORT }}
+  FRONT_PORT: $ {{ secrets.FRONT_PORT }}
 
 jobs:
   image-cache-or-build:
