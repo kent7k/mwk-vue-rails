@@ -1,6 +1,6 @@
 FROM ruby:2.7.1-alpine3.11
 
-ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata mysql-dev mariadb-client yarn" \
+ENV RUNTIME_PACKAGES="linux-headers libxml2-dev bash curl make gcc libc-dev nodejs tzdata mysql-dev mariadb-client yarn" \
     DEV_PACKAGES="build-base curl-dev" \
     LANG=C.UTF-8 \
     TZ=Asia/Tokyo
