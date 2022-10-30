@@ -57,7 +57,7 @@ jobs:
 
       - name: Docker build
         id: docker-build
-        run: echo $ {{ secrets.MYSQL_ALLOW_EMPTY_PASSWORD }} && docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1 base
+        run: docker-compose build --build-arg BUILDKIT_INLINE_CACHE=1 base
 
       - name: Docker tag and save
         id: docker-tag-save
