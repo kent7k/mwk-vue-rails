@@ -1,4 +1,4 @@
-FROM node:14.3
+FROM node:16.13.1-alpine
 
 WORKDIR /app
 
@@ -6,20 +6,23 @@ ENV LANG C.UTF-8
 ENV TZ Asia/Tokyo
 
 ADD package.json /app/package.json
-ADD package-lock.json /app/package-lock.json
+ADD yarn.lock /app/yarn.lock
 
-RUN apt-get update -y && \
-  apt-get upgrade -y && \
-  npm install -g npm@6.14.4 && \
-  npm install -g ejs@3.0.1 &&\
-  npm install -g nuxt@2.0.0 &&\
-  npm install -g create-nuxt-app@2.15.0 &&\
-  npm install -g defu@3.1.0
+RUN apk update && \
+    yarn global add create-nuxt-app
+
+#RUN apt-get update -y && \
+#  apt-get upgrade -y && \
+#  npm install -g npm@6.14.4 && \
+#  npm install -g ejs@3.0.1 &&\
+#  npm install -g nuxt@2.0.0 &&\
+#  npm install -g create-nuxt-app@2.15.0 &&\
+#  npm install -g defu@3.1.0
 
 ADD . /app
 
-RUN npm run build
+RUN yarn run build
 
 EXPOSE 3000
 
-CMD ["npm", "run", "start"]
+CMD ["yarn", "run", "start"]
