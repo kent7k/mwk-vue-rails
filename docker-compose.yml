@@ -37,7 +37,7 @@ services:
     depends_on:
       - db
     ports:
-      - ${API_PORT}:${CONTAINER_PORT}
+      - ${API_PORT:-5050}:${CONTAINER_PORT:-3000}
 #    - 5050:3000
     volumes:
       - ./backend:/$WORKDIR:cached
@@ -67,8 +67,8 @@ services:
 # node_modulesはホストと共有しないでvolumeマウント
 
     ports:
-      - "$FRONT_PORT:$CONTAINER_PORT"
-#    - 3000:80
+       - "3000:80"
+#      - "$FRONT_PORT:$CONTAINER_PORT"
 #    networks:
 #      app_net:
 #        ipv4_address: '172.21.0.4'
