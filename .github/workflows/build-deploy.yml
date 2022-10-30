@@ -25,6 +25,7 @@ env:
   WORKDIR: $ {{ secrets.WORKDIR }}
   CONTAINER_PORT: $ {{ secrets.CONTAINER_PORT }}
   FRONT_PORT: $ {{ secrets.FRONT_PORT }}
+  API_PORT: $ {{ secrets.API_PORT }}
 
 jobs:
   image-cache-or-build:
