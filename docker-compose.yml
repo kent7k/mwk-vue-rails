@@ -37,8 +37,8 @@ services:
     depends_on:
       - db
     ports:
-      - "$API_PORT:$CONTAINER_PORT"
-#    - 5000:3000
+      - ${API_PORT}:${CONTAINER_PORT}
+#    - 5050:3000
     volumes:
       - ./backend:/$WORKDIR:cached
       - bundle_data:/usr/local/bundle:cached
