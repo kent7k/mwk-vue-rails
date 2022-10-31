@@ -87,5 +87,6 @@ services:
 
 volumes:
   db-data:
-  bundle_data:
+  bundle-cache:
+  rails-cache:
   node_modules_volume:
