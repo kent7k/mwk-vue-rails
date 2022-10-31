@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 
 services:
   db:
@@ -21,12 +21,15 @@ services:
   backend:
     build: 
       context: ./backend
+      cache_from:
+        - rails6api-development-cache
       args:
         WORKDIR: $WORKDIR
         CONTAINER_PORT: $CONTAINER_PORT
     container_name: backend
 #    build: ./backend/
 #    image: backend
+    image: rails6api-development:0.1.0
     command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'" 
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
@@ -41,11 +44,10 @@ services:
 #      - ${API_PORT:-5050}:${CONTAINER_PORT:-3000}
     volumes:
       - ./backend:/$WORKDIR:cached
-      - bundle_data:/usr/local/bundle:cached
-      - /app/vendor
-      - /app/tmp
-      - /app/log
-      - /app/.git
+#      - ./:/app:cached
+      - ${GEMS_CACHE_DIR:-bundle-cache}:/bundle
+      - rails-cache:/app/tmp/cache
+
 #    networks:
 #      app_net:
 #        ipv4_address: '172.21.0.3'
