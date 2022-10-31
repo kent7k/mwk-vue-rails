@@ -5,7 +5,7 @@ ARG CONTAINER_PORT
 ARG API_DOMAIN
 ARG DATABASE_URL
 
-ENV RUNTIME_PACKAGES="linux-headers libxml2-dev make gcc libc-dev nodejs tzdata mysql-dev mysql-client yarn" \
+ENV RUNTIME_PACKAGES="linux-headers libxml2-dev bash curl git make gcc libc-dev nodejs tzdata mysql-dev mariadb-client yarn" \
     DEV_PACKAGES="build-base curl-dev" \
     HOME=/${WORKDIR} \
     LANG=C.UTF-8 \
