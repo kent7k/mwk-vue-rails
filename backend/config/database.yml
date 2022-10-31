@@ -23,4 +23,5 @@ production:
   url: <%= ENV['DATABASE_URL'] %>
   database: production
   password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
+  host: terraform-20221023041629708800000006.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
   
