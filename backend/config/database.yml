@@ -5,7 +5,6 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   #  host: db
-  host: terraform-20221023041629708800000006.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
   # ↓↓CiecleCI に通すときはコメントアウト
 #  password: <%#= ENV['MYSQL_ROOT_PASSWORD'] || '' %>
 
@@ -22,6 +21,7 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
+#  url: terraform-20221023041629708800000006.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
   database: production
   password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
 
