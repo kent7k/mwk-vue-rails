@@ -6,7 +6,7 @@ default: &default
   username: root
   host: db
   # ↓↓CiecleCI に通すときはコメントアウト
-  # password: <%= ENV['MYSQL_ROOT_PASSWORD'] || '' %>
+#  password: <%#= ENV['MYSQL_ROOT_PASSWORD'] || '' %>
 
 development:
   <<: *default
