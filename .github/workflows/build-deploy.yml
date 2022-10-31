@@ -163,4 +163,3 @@ jobs:
           -v /var/run/docker.sock:/var/run/docker.sock
           -v ${TRIVY_CACHE_DIR}:/root/.cache/
           aquasec/trivy image ${APP_IMAGE_CACHE_TAG}
-
