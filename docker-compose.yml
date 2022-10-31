@@ -18,25 +18,40 @@ services:
 #      app_net:
 #        ipv4_address: '172.21.0.2'
 
-  backend:
-    build: 
+  base: &base
+    build:
       context: ./backend
+      dockerfile: ./backend/Dockerfile
       cache_from:
         - rails6api-development-cache
       args:
+        ARG_RUBY_VERSION: ${ARG_RUBY_VERSION:-2.7.1}
         WORKDIR: $WORKDIR
         CONTAINER_PORT: $CONTAINER_PORT
+    image: rails6api-development:0.1.0
+    tmpfs:
+      - /tmp
+
+  wait-middleware: &wait-middleware
+    <<: *base
+    environment:
+      WAIT_HOSTS: db:3306
+    depends_on:
+      - db
+    command: /wait
+
+  backend: &backend
+    <<: *base
+    stdin_open: true
+    tty: true
     container_name: backend
 #    build: ./backend/
 #    image: backend
     image: rails6api-development:0.1.0
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'" 
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
       API_DOMAIN: "localhost:$FRONT_PORT"
-    stdin_open: true
-    tty: true
     depends_on:
       - db
     ports:
@@ -47,6 +62,19 @@ services:
 #      - ./:/app:cached
       - ${GEMS_CACHE_DIR:-bundle-cache}:/bundle
       - rails-cache:/app/tmp/cache
+
+  console:
+    <<: *backend
+    ports:
+      - "3333:3000"
+    command: /bin/bash
+
+  server:
+    <<: *backend
+    ports:
+      - "3333:3000"
+#    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "rm -f tmp/pids/server.pid && rails s -p 3000 -b 0.0.0.0"
 
 #    networks:
 #      app_net:
