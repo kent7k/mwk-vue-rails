@@ -31,6 +31,9 @@ RUN apk update && \
     /usr/lib/mysqld* \
     /usr/bin/mysql*
 
+RUN gem install bundler
+RUN bundle install
+
 ADD . ${HOME}
 
 EXPOSE ${CONTAINER_PORT}
