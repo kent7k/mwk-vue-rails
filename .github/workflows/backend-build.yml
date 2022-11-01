@@ -32,7 +32,7 @@
 #    strategy:
 #      matrix:
 #        ruby: ["2.7.1"]
-#        os: [ubuntu-18.04]
+#        os: [ubuntu-latest]
 #    runs-on: ${{ matrix.os }}
 #    env:
 #      ARG_RUBY_VERSION: ${{ matrix.ruby }}
@@ -72,7 +72,7 @@
 #    strategy:
 #      matrix:
 #        ruby: ["2.7.1"]
-#        os: [ubuntu-18.04]
+#        os: [ubuntu-latest]
 #    runs-on: ${{ matrix.os }}
 #    env:
 #      ARG_RUBY_VERSION: ${{ matrix.ruby }}
@@ -132,7 +132,7 @@
 #    strategy:
 #      matrix:
 #        ruby: ["2.7.1"]
-#        os: [ubuntu-18.04]
+#        os: [ubuntu-latest]
 #    runs-on: ${{ matrix.os }}
 #    env:
 #      ARG_RUBY_VERSION: ${{ matrix.ruby }}
