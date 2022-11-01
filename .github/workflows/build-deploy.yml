@@ -21,8 +21,6 @@ jobs:
         ruby: ["2.7.1"]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    env:
-      ARG_RUBY_VERSION: ${{ matrix.ruby }}
     environment: production
     permissions:
       id-token: write
@@ -46,6 +44,7 @@ jobs:
 
       - name: Build app and push image to AWS ECR
         env:
+          ARG_RUBY_VERSION: ${{ matrix.ruby }}
           AWS_ECR_REGISTRY: ${{ secrets.AWS_ECR_REGISTRY }}
           AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
         run: |
