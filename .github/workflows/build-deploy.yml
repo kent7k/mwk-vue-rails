@@ -67,7 +67,7 @@ jobs:
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: prj-name-backend-task
+          task-definition: prj-name-backend-task.json
           container-name: mwk-backend
           image: ${{ steps.prep.outputs.tagged_image }}
 
