@@ -50,10 +50,9 @@ services:
     <<: *base
     stdin_open: true
     tty: true
-    container_name: backend
+    container_name: mwk-backend
 #    build: ./backend/
 #    image: backend
-    image: rails6api-development:0.1.0
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
@@ -94,7 +93,7 @@ services:
         CONTAINER_PORT: $CONTAINER_PORT
         API_URL: "http://localhost:$API_PORT"
     command: yarn run dev
-    container_name: frontend
+    container_name: mwk-frontend
 #    build: ./frontend/
 #    image: frontend
     volumes:

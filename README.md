@@ -2,6 +2,14 @@
 #### リンク：https://meetwithkids.org/（８月１３日配信停止しました）
 #### Qiita：ゼロからAWS/Terraform/Nuxt.js/Rubyを学習し始めると、ポートフォリオのリリースまでにどのような過程を踏むことになるのか？（ https://qiita.com/wonderglot/items/cf0d4faa77b925960802 ）
 
+
+# 開発環境
+```shell
+docker-compose -f docker-compose.dev.yml build
+docker-compose -f docker-compose.dev.yml up
+docker exec -it <container> rails db:prepare
+```
+
 ## 概要
 <b>子どもたちのネットワークに異年齢間の交友関係を作り出したい</b>という思いで制作。<br><br>
 実際に異年齢保育/教育（０〜１２歳）の現場で親御さんに直接リサーチしました。<br>
