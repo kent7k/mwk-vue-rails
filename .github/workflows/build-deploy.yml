@@ -167,7 +167,13 @@ jobs:
 
   deploy:
     name: Deploy
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: ["2.7.1"]
+        os: [ubuntu-18.04]
+    runs-on: ${{ matrix.os }}
+    env:
+      ARG_RUBY_VERSION: ${{ matrix.ruby }}
     environment: production
 
     steps:
@@ -196,8 +202,9 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
           IMAGE_TAG: ${{ github.sha }}
+          ARG_RUBY_VERSION: ${{ matrix.ruby }}
         run: |
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG ./app --build-arg　ARG_RUBY_VERSION=${{ matrix.ruby }} 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
 
