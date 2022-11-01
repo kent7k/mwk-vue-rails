@@ -56,7 +56,7 @@ jobs:
         with:
           context: ./frontend
           push: true
-          file: Dockerfile.prd
+          file: ./frontend/Dockerfile.prd
           tags: ${{ steps.prep.outputs.tagged_image }}
           cache: enabled
           cache-from: type=gha
