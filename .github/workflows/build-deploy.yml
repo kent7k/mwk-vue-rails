@@ -57,7 +57,7 @@ jobs:
         with:
           context: ./backend
           push: true
-          file:
+          file: ./backend/Dockerfile.prd
           build-args: |
             ARG_RUBY_VERSION=${{ matrix.ruby }}
           tags: ${{ steps.prep.outputs.tagged_image }}
@@ -80,6 +80,6 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ secrets.AWS_ECS_SERVICE }}
-          cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+          service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
+          cluster: ${{ secrets.AWS_ECS_CLUSTER__BACK }}
 

@@ -20,9 +20,6 @@ RUN apk update && \
     npm install -g n && \
     rm -rf /var/cache/apk/*
 
-RUN yarn install
-RUN yarn run build
-
 EXPOSE ${CONTAINER_PORT}
 
 CMD ["npm", "run", "start"]

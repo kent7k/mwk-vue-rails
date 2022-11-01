@@ -58,7 +58,6 @@ jobs:
           push: true
           file: ./frontend/Dockerfile.prd
           tags: ${{ steps.prep.outputs.tagged_image }}
-          cache: enabled
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -79,5 +78,5 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ secrets.AWS_ECS_SERVICE-F }}
-          cluster: ${{ secrets.AWS_ECS_CLUSTER-F }}
+          service: ${{ secrets.AWS_ECS_SERVICE__FRONT }}
+          cluster: ${{ secrets.AWS_ECS_CLUSTER__FRONT }}
