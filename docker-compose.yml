@@ -85,30 +85,29 @@ services:
 #      app_net:
 #        ipv4_address: '172.21.0.3'
 
-  frontend:
-    build:
-      context: ./frontend
-      args:
-        WORKDIR: $WORKDIR
-        CONTAINER_PORT: $CONTAINER_PORT
-        API_URL: "http://localhost:$API_PORT"
-    command: yarn run dev
-    container_name: mwk-frontend
-#    build: ./frontend/
-#    image: frontend
-    volumes:
-      - ./frontend:/$WORKDIR:cached
-      - node_modules_volume:/$WORKDIR/node_modules 
-# node_modulesはホストと共有しないでvolumeマウント
-
-    ports:
-       - "3000:3000"
+#  frontend:
+#    build:
+#      context: ./frontend
+#      args:
+#        WORKDIR: $WORKDIR
+#        CONTAINER_PORT: $CONTAINER_PORT
+#        API_URL: "http://localhost:$API_PORT"
+#    command: yarn run dev
+#    container_name: mwk-frontend
+##    build: ./frontend/
+##    image: frontend
+#    volumes:
+#      - ./frontend:/$WORKDIR:cached
+#      - node_modules_volume:/$WORKDIR/node_modules
+## node_modulesはホストと共有しないでvolumeマウント
+#    ports:
+#       - "3000:3000"
 #      - "$FRONT_PORT:$CONTAINER_PORT"
 #    networks:
 #      app_net:
 #        ipv4_address: '172.21.0.4'
-    depends_on:
-      - backend
+#    depends_on:
+#      - backend
 
 #networks:
 #  app_net:
@@ -122,4 +121,4 @@ volumes:
   db-data:
   bundle-cache:
   rails-cache:
-  node_modules_volume:
+#  node_modules_volume:
