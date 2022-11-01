@@ -39,11 +39,7 @@ jobs:
           role-session-name: iam_role_for_github_actions
 
       - name: Login to Amazon ECR
-        id: login-ecr-f
-        uses: aws-actions/amazon-ecr-login@v1.4.0
-
-      - name: Login to Amazon ECR
-        id: login-ecr-f
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1.4.0
 
       - name: Build and push
