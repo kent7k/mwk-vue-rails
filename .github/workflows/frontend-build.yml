@@ -14,13 +14,17 @@ on:
       - 'LICENSE'
 
 jobs:
-  image-cache-or-build:
+  deploy:
+    name: Deploy
     strategy:
       matrix:
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
-    env:
-      ARG_RUBY_VERSION: ${{ matrix.ruby }}
+    environment: production
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
 
     steps:
       - uses: actions/checkout@v3
