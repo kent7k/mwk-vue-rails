@@ -180,9 +180,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: buildx
-        uses: docker/setup-buildx-action@v1
-
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -191,31 +188,26 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION }}
 
       - name: Login to Amazon ECR
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
-        with:
-          registry: ${{ secrets.ECR_REGISTRY }}
 
       - name: Build, tag, and push image to Amazon ECR
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          tags: ${{ secrets.ECR_REGISTRY }}/${{ secrets.ECR_REPOSITORY }}:${{ github.sha }}
 #        env:
 #          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
 #          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
 #          IMAGE_TAG: ${{ github.sha }}
 #
-#        id: build-image
-#        env:
-#          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-#          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-#          IMAGE_TAG: ${{ github.sha }}
-#          ARG_RUBY_VERSION: ${{ matrix.ruby }}
-#        run: |
-#          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG . --build-arg ARG_RUBY_VERSION=${{ matrix.ruby }}
-#          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-#          echo "::set-output name=image::${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
-#
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
+          IMAGE_TAG: ${{ github.sha }}
+          ARG_RUBY_VERSION: ${{ matrix.ruby }}
+        run: |
+          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./backend/Dockerfile.prd ./backend --build-arg ARG_RUBY_VERSION=${{ matrix.ruby }} 
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+          echo "::set-output name=image::${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
+
 #          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
 #          ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPO_NAME }}
 #        run: |
