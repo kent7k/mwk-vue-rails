@@ -47,7 +47,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
+          context: ./backend
           push: true
           build-args: |
             ARG_RUBY_VERSION=${{ matrix.ruby }}
