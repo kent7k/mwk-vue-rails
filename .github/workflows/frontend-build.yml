@@ -37,7 +37,7 @@ jobs:
         id: prep
         run: |
           GITHUB_TAG=$(echo $GITHUB_SHA | head -c7)
-          echo "::set-output name=tagged_image::${{ secrets.AWS_ECR_REGISTRY__FRONT }}/${{ secrets.AWS_ECR_REPOSITORY__FRONT }}:${GITHUB_TAG}"
+          echo "::set-output name=tagged_image::${{ secrets.AWS_ECR_REGISTRY }}/${{ secrets.AWS_ECR_REPOSITORY__FRONT }}:${GITHUB_TAG}"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1.6.1
@@ -78,5 +78,5 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ secrets.AWS_ECS_SERVICE }}
+          service: ${{ secrets.AWS_ECS_SERVICE__FRONT }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
