@@ -54,8 +54,10 @@ jobs:
           push: true
           file:
           tags: ${{ steps.prep.outputs.tagged_image }}
+          cache: enabled
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
 
       - name: Download task definition
         run: |
