@@ -46,15 +46,13 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v3
-        env:
-          ARG_RUBY_VERSION: ${{ matrix.ruby }}
-          AWS_ECR_REGISTRY: ${{ secrets.AWS_ECR_REGISTRY }}
-          AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
         with:
           context: .
           push: true
           build-args: |
             ARG_RUBY_VERSION=${{ matrix.ruby }}
+            AWS_ECR_REGISTRY: ${{ secrets.AWS_ECR_REGISTRY }}
+            AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
           tags: $AWS_ECR_REGISTRY/$AWS_ECR_REPOSITORY:${{ github.sha }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
