@@ -33,6 +33,12 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
+      - name: Prepare
+        id: prep
+        run: |
+          GITHUB_TAG=$(echo $GITHUB_SHA | head -c7)
+          echo "::set-output name=tagged_image::{{ secrets.AWS_ECR_REGISTRY }}/${{ secrets.AWS_ECR_REPOSITORY }}:${GITHUB_TAG}"
+
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1.6.1
         with:
@@ -53,7 +59,7 @@ jobs:
           file:
           build-args: |
             ARG_RUBY_VERSION=${{ matrix.ruby }}
-          tags: ${{ secrets.AWS_ECR_REGISTRY }}/${{ secrets.AWS_ECR_REPOSITORY }}:${{ github.sha }}
+          tags: ${{ steps.prep.outputs.tagged_image }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -63,7 +69,7 @@ jobs:
         with:
           task-definition: ecs/prj-name_backend_definition.json
           container-name: mwk-backend
-          image: ${{ steps.build-image.outputs.image }}
+          image: ${{ steps.prep.outputs.tagged_image }}
 
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
