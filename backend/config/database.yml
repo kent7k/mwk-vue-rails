@@ -16,7 +16,7 @@ test:
   <<: *default
   database: app_test
   # ↓↓CiecleCI に通すときはコメントイン
-#  host: 127.0.0.1
+  host: 127.0.0.1
 
 production:
   <<: *default
