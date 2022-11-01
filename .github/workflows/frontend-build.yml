@@ -75,5 +75,5 @@ jobs:
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
-          service: ${{ secrets.AWS_ECS_SERVICE_F }}
-          cluster: ${{ secrets.AWS_ECS_CLUSTER_F }}
+          service: ${{ secrets.AWS_ECS_SERVICE-F }}
+          cluster: ${{ secrets.AWS_ECS_CLUSTER-F }}
