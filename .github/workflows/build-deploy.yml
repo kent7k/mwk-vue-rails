@@ -40,7 +40,7 @@ jobs:
 #    steps:
 #      - name: Check out code
 #        id: checkout
-#        uses: actions/checkout@v2
+#        uses: actions/checkout@v3
 #
 #      - name: Cache docker image
 #        id: cache-docker-image
@@ -82,7 +82,7 @@ jobs:
 #    steps:
 #      - name: Check out code
 #        id: checkout
-#        uses: actions/checkout@v2
+#        uses: actions/checkout@v3
 #
 #      - name: Generate dotenv
 #        id: generate-dotenv
@@ -141,7 +141,7 @@ jobs:
 #    steps:
 #      - name: Check out code
 #        id: checkout
-#        uses: actions/checkout@v2
+#        uses: actions/checkout@v3
 #
 #      - name: Cache docker image
 #        id: cache-docker-image
@@ -175,35 +175,43 @@ jobs:
     env:
       ARG_RUBY_VERSION: ${{ matrix.ruby }}
     environment: production
+    permissions:
+      id-token: write
+      contents: read
+      actions: read
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v1.6.1
+#        with:
+#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#          aws-region: ${{ secrets.AWS_REGION }}
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ secrets.AWS_REGION }}
+          aws-region: ap-northeast-1
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/iam_role_for_github_actions
+          role-session-name: iam_role_for_github_actions
+
 
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1
+        uses: aws-actions/amazon-ecr-login@v1.4.0
 
-      - name: Build, tag, and push image to Amazon ECR
+      - name: Build app and push image to AWS ECR
 #        env:
 #          ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
 #          ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
 #          IMAGE_TAG: ${{ github.sha }}
 #
-        id: build-image
+#        id: build-image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           ECR_REPOSITORY: ${{ secrets.ECR_REPOSITORY }}
-          IMAGE_TAG: ${{ github.sha }}
           ARG_RUBY_VERSION: ${{ matrix.ruby }}
         run: |
+          IMAGE_TAG=$(echo ${{ github.ref }} | sed -e "s#refs/tags/##g")
           docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG -f ./backend/Dockerfile.prd ./backend --build-arg ARG_RUBY_VERSION=${{ matrix.ruby }} 
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "::set-output name=image::${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}"
