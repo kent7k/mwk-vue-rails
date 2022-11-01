@@ -53,8 +53,6 @@ jobs:
           context: ./frontend
           push: true
           file:
-#          build-args: |
-#            ARG_RUBY_VERSION=${{ matrix.ruby }}
           tags: ${{ steps.prep.outputs.tagged_image }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
