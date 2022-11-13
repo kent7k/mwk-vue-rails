@@ -137,7 +137,7 @@ export default {
     //     console.log(res.data)
     //   })
     // }, */
-    /* 
+    /*
   watch: {
     count() {
       return this.post.like_users.length
@@ -169,9 +169,3 @@ methods: {
   },
 }
 </script>
-
-<style scoped>
-.rounded-card {
-  border-radius: 20px;
-}
-</style>

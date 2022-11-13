@@ -193,9 +193,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.rounded-card {
-  border-radius: 20px;
-}
-</style>

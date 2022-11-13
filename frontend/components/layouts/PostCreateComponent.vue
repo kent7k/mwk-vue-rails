@@ -262,7 +262,7 @@ export default {
           console.log('Success')
           this.dialog = false
           this.$router.go({ path: '/', force: true })
-          /* 
+          /*
           this.$store.commit('snackbarMessage/setMessage', ' 投稿しました', {
             root: true,
           })
@@ -285,9 +285,3 @@ export default {
   },
 }
 </script>
-
-<style>
-.rounded-card {
-  border-radius: 20px;
-}
-</style>

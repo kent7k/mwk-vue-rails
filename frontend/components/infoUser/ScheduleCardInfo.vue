@@ -80,8 +80,8 @@
             <v-row justify="space-between">
               <v-col class="text-left" cols="6">
                 <span
-                  class="headline 
-                          mr-8 
+                  class="headline
+                          mr-8
                           font-weight-bold primary--text"
                   >{{ $dayjs(post.finish_time).format('A hh:mm') }}まで</span
                 >
@@ -119,16 +119,16 @@
           </v-card>
           <!-- </v-timeline-item> -->
           <!--         <v-timeline-item dense hide-dot class="mt-n3 mb-n4" color="orange" large>
-          
+
             <v-chip  color="white" text-color="purple">
               <v-icon class="ml-n2 mr-2">mdi-account-circle</v-icon>
               [ {{ post.join_users.length }} / {{ post.member }} ] 人
             </v-chip>
         </v-timeline-item>         -->
 
-          <!--  
+          <!--
         <v-timeline-item hide-dot class="white--text" color="orange" large>
-          
+
                     <template v-slot:icon>
             <strong><span>参加</span></strong>
           </template>
@@ -139,7 +139,7 @@
           :key="user.id"
           class="text-center align-self-center"
           color="white"
-        > 
+        >
                   <nuxt-link :to="{ path: `/users/${user.id}` }">
           <user-avatar :size="50" :user="user" class="list-avatar mx-3" />
                     </nuxt-link>
@@ -235,9 +235,6 @@ export default {
 </script>
 
 <style scoped>
-.rounded-card {
-  border-radius: 20px;
-}
 .shadow-text1 {
   text-shadow: 1px 1px 2px #ffffff;
 }

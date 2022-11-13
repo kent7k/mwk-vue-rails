@@ -43,7 +43,9 @@ export default {
   /*
    ** Global CSS
    */
-  css: [],
+  css: [
+    '~/assets/css/global.scss',
+  ],
   plugins: [
     { src: '~/plugins/axios.js', ssr: false },
     { src: '~/plugins/dayjs', ssr: false },
@@ -109,7 +111,6 @@ export default {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: false,
       themes: {

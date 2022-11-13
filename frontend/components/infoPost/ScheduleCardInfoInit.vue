@@ -320,9 +320,6 @@ export default {
 </script>
 
 <style scoped>
-.rounded-card {
-  border-radius: 20px;
-}
 .shadow-text1 {
   text-shadow: 1px 1px 2px #ffffff;
 }

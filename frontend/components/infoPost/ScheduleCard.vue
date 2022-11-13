@@ -232,9 +232,6 @@ export default {
 </script>
 
 <style scoped>
-.rounded-card {
-  border-radius: 20px;
-}
 .v-card--reveal {
   align-items: center;
   bottom: 0;
