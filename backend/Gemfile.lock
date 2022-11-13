@@ -118,6 +118,10 @@ GEM
     formatador (1.1.0)
     globalid (1.0.0)
       activesupport (>= 5.0)
+    graphiql-rails (1.8.0)
+      railties
+      sprockets-rails
+    graphql (2.0.15)
     hashie (5.0.0)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
@@ -297,6 +301,8 @@ DEPENDENCIES
   fastimage
   ffi (= 1.15.5)
   fog-aws
+  graphiql-rails
+  graphql
   jquery-rails
   listen (~> 3.2)
   lograge
