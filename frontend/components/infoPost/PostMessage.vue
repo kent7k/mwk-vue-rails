@@ -115,17 +115,8 @@ export default {
 </script>
 
 <style scoped>
-.radius-image {
-  border: 0px solid;
-  border-radius: 20px;
-}
 .radius-image2 {
   border: 0px solid;
   border-radius: 20px;
-}
-.radius-big-image {
-  border: 1px solid rgba(0, 0, 0.8);
-  border-radius: 20px;
-  border-color: #bdbdbd;
 }
 </style>

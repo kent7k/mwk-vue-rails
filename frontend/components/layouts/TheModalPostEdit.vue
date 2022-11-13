@@ -339,7 +339,7 @@ export default {
           setTimeout(() => {
             this.$store.commit('flashMessage/setStatus', false, { root: true })
           }, 1000)
-          /* 
+          /*
           console.log(err)
           console.log('投稿失敗') */
         })
@@ -367,14 +367,5 @@ export default {
 <style scoped>
 .rounded-card {
   border-radius: 20px;
-}
-
-.signup-link {
-  color: #2196f3;
-  cursor: pointer;
-}
-.signup-link:hover {
-  opacity: 0.8;
-  text-decoration: underline;
 }
 </style>

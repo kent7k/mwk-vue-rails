@@ -38,7 +38,7 @@
             :key="message.id"
             class="mb-3 mt-3"
           >
-            <message :message="message" />
+            <TheMessage :message="message" />
           </v-sheet>
         </template>
       </v-card>
@@ -69,7 +69,7 @@ import { mapGetters } from 'vuex'
 import userAvatar from '~/components/infoUser/UserAvatar.vue'
 import userFollow from '~/components/infoUser/UserFollow.vue'
 import postMessage from '~/components/infoPost/PostMessage.vue'
-import message from '~/components/infoPost/Message.vue'
+import message from '@/components/infoPost/TheMessage.vue'
 import theModalMessageCreate from '~/components/layouts/TheModalMessageCreate.vue'
 
 export default {

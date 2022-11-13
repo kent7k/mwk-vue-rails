@@ -278,30 +278,10 @@ export default {
 </script>
 
 <style scoped>
-.user-image {
-  border: 1px solid;
-  border-radius: 9px;
-  border-color: #bdbdbd;
-}
-.user-name {
-  display: flex;
-  justify-content: space-between;
-}
-.following {
-  display: flex;
-}
 .v-application p {
   margin-bottom: 0px;
 }
-.container {
-  padding-bottom: 0px;
-}
 .rounded-card {
   border-radius: 20px;
-}
-.atmark-right {
-  color: white;
-  font-weight: bold;
-  float: right;
 }
 </style>

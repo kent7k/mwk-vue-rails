@@ -24,9 +24,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.message {
-  color: transparent;
-}
-</style>

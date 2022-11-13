@@ -73,10 +73,6 @@ export default {
 </script>
 
 <style scoped>
-/* .list-item {
-  width: 100px;
-  cursor: pointer;
-} */
 .list:hover {
   transition: 0.3s;
   background-color: #f5f5f5;
@@ -84,14 +80,4 @@ export default {
 .list {
   cursor: default;
 }
-
-.small-image {
-  border: 1px solid;
-  border-radius: 9px;
-  border-color: #bdbdbd;
-}
-/* .small-image:hover {
-  opacity: 0.7;
-}
- */
 </style>

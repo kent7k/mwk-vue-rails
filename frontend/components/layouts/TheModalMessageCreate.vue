@@ -123,13 +123,4 @@ export default {
 .rounded-card {
   border-radius: 20px;
 }
-
-.signup-link {
-  color: #2196f3;
-  cursor: pointer;
-}
-.signup-link:hover {
-  opacity: 0.8;
-  text-decoration: underline;
-}
 </style>

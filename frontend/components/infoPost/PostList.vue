@@ -1,7 +1,6 @@
 <template>
   <v-card flat>
     <v-list>
-      <!-- <v-list-item-group> -->
       <v-row>
         <v-list-item
           v-for="post in posts"
@@ -16,21 +15,14 @@
           <v-list-item-title class="list-item" @click="pagelink(post.id)">
             {{ post.name }}
           </v-list-item-title>
-          <!-- <post-card-menu :post="post" /> -->
         </v-list-item>
       </v-row>
-      <!-- </v-list-item-group> -->
     </v-list>
   </v-card>
 </template>
 
 <script>
-/* import postCardMenu from '~/components/infoPost/PostCardMenu.vue' */
-
 export default {
-  components: {
-    /* postCardMenu, */
-  },
   props: {
     posts: {
       type: Array,

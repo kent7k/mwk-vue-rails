@@ -184,14 +184,6 @@ export default {
 .rounded-card {
   border-radius: 20px;
 }
-.v-card--reveal {
-  align-items: center;
-  bottom: 0;
-  justify-content: center;
-  opacity: 0.9;
-  position: absolute;
-  width: 100%;
-}
 .shadow-text {
   text-shadow: 2px 5px 10px;
   border-bottom: double;

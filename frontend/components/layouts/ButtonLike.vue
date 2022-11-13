@@ -30,7 +30,7 @@
         color="red white--text font-weight-bold"
         @click="joining"
       >
-        <!-- 
+        <!--
        absolute
         right
         top
@@ -80,7 +80,7 @@ export default {
       type: Object,
       required: true,
     },
-    /* 
+    /*
     fronttitle: {
       type: String,
       default: '',
@@ -89,7 +89,7 @@ export default {
     backtitle: {
       type: String,
       default: '',
-      required: true, 
+      required: true,
     }, */
     isRoundedLike: {
       type: Boolean,
@@ -229,7 +229,7 @@ export default {
           this.$axios.$get(`/api/v1/posts/${this.post.id}`).then((res) => {
             this.$store.commit('post/setPost', res, { root: true })
             this.isJoin = true
-          }) /* 
+          }) /*
           setTimeout(() => {
             this.$store.commit('snackbarMessage/setStatus', false, {
               root: true,
@@ -242,5 +242,3 @@ export default {
   },
 }
 </script>
-
-<style scoped></style>

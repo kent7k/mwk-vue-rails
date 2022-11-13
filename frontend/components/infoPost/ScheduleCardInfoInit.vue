@@ -330,10 +330,6 @@ export default {
   text-shadow: 2px 2px 3px #ffffff;
   border-bottom: double;
 }
-.shadow-text3 {
-  text-shadow: 2px 5px 50px;
-}
-
 .orangecolor {
   background: #ffffff; /*背景色*/
   padding: 0.5em; /*文字周りの余白*/
