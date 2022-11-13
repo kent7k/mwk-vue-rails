@@ -5,7 +5,7 @@
     <v-spacer></v-spacer>
 
     <v-menu bottom left>
-      <template v-slot:activator="{ on, attrs }">
+      <template #activator="{ on, attrs }">
         <v-btn
           color="#BDBDBD88"
           fab

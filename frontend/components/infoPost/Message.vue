@@ -3,7 +3,7 @@
     <v-card class="mx-auto" color="#26c6da" dark max-width="400">
       <v-card-title>
         <v-menu transition="scroll-x-transition">
-          <template v-slot:activator="{ on, attrs }">
+          <template #activator="{ on, attrs }">
             <v-btn
               color="white"
               class="ma-2"

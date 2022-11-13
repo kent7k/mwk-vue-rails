@@ -15,7 +15,7 @@
         <v-col cols="4">
           <template v-if="message.image.url">
             <v-menu transition="scroll-x-transition">
-              <template v-slot:activator="{ on, attrs }">
+              <template #activator="{ on, attrs }">
                 <v-img
                   v-if="message.image.url"
                   :src="message.image.url"

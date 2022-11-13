@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   env: {
     browser: true,
-    node: true
+    node: true,
   },
   extends: [
     '@nuxtjs/eslint-config-typescript',
@@ -10,27 +10,31 @@ module.exports = {
     'prettier',
     'prettier/vue',
     'plugin:prettier/recommended',
-    'plugin:nuxt/recommended'
+    'plugin:nuxt/recommended',
   ],
-  plugins: [
-    'prettier'
-  ],
+  plugins: ['prettier'],
   // add your custom rules here
   rules: {
-    "no-console": "off",
-    "no-unused-vars": "off",
-    "prettier/prettier": [
-      "error",
+    'no-console': 'off',
+    'no-unused-vars': 'off',
+    'prettier/prettier': [
+      'error',
       {
-        "singleQuote": true,
-        "trailingComma": "es5"
-      }
-    ]
+        singleQuote: true,
+        trailingComma: 'es5',
+      },
+    ],
+    'vue/no-lone-template': [
+      'off',
+      {
+        ignoreAccessible: false,
+      },
+    ],
   },
   overrides: [
     {
-      files: ["*.vue"],
-      processor: "vue/.vue"
-    }
-  ]
+      files: ['*.vue'],
+      processor: 'vue/.vue',
+    },
+  ],
 }

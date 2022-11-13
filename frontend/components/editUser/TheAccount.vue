@@ -115,7 +115,6 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import theAccountSettingDialog from '~/components/editUser/TheAccountSettingDialog.vue'
-import listComponent from '~/components/layouts/ListComponent.vue'
 import userMessageList from '~/components/infoUser/UserMessageList.vue'
 import userPostList from '~/components/infoUser/UserPostList.vue'
 import userAvatar from '~/components/infoUser/UserAvatar.vue'
@@ -124,7 +123,6 @@ export default {
   name: 'ListComponent',
   components: {
     theAccountSettingDialog,
-    listComponent,
     userMessageList,
     userPostList,
     userAvatar,

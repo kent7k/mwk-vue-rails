@@ -20,7 +20,7 @@
               style="background-color: white"
             >
               <v-hover>
-                <template v-slot:default="{ hover }">
+                <template #default="{ hover }">
                   <v-sheet dark flat color="white">
                     <v-img
                       v-if="p.image.url"

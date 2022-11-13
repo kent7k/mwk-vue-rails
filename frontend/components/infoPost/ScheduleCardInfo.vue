@@ -12,7 +12,7 @@
           <v-img v-else contain :src="defaultImage"> </v-img>
           <v-sheet style="position: relative;">
             <template v-if="!login">
-              <!--               
+              <!--
               <v-btn
                 color="åwhite--text font-weight-bold"
                 absolute
@@ -101,8 +101,8 @@
             <v-row justify="space-between">
               <v-col class="text-left" cols="6">
                 <span
-                  class="headline 
-                          mr-8 
+                  class="headline
+                          mr-8
                           font-weight-bold primary--text"
                   >{{ $dayjs(post.finish_time).format('A hh:mm') }}まで</span
                 >
@@ -125,7 +125,7 @@
             color="orange"
             large
           >
-            <template v-slot:icon>
+            <template #icon>
               <nuxt-link :to="{ path: `/users/${post.user.id}` }">
                 <user-avatar
                   :size="50"
@@ -158,7 +158,7 @@
           </v-timeline-item>
 
           <v-timeline-item hide-dot class="white--text" color="orange" large>
-            <template v-slot:icon>
+            <template #icon>
               <strong><span>参加</span></strong>
             </template>
 
@@ -180,22 +180,6 @@
             </v-card>
           </v-timeline-item>
 
-          <v-timeline-item hide-dot class="mt-n8">
-            <!--                   <v-chip color="primary" outlined text-color="orange">
-                <v-icon left>
-                  mdi-wallet-travel
-                </v-icon>
-
-                予算: {{ post.price }}円/人
-              </v-chip> 
-              <v-chip color="orange" text-color="white">
-                <v-icon left>
-                  mdi-star
-                </v-icon>
-
-                場所: {{ post.place }}
-              </v-chip> -->
-          </v-timeline-item>
           <template v-if="!login">
             <v-btn
               color="pink white--text"
@@ -220,7 +204,7 @@
           </template>
           <template v-if="!login">
             <!--             <div class="mb-5">
-              <v-btn color="orange" nuxt x-large 
+              <v-btn color="orange" nuxt x-large
               class="ml-3 white--text"
               @click.stop="loginDialog(true)"
               disabled
@@ -257,7 +241,6 @@
 import { mapGetters, mapActions } from 'vuex'
 import buttonLike from '~/components/layouts/ButtonLike.vue'
 import userAvatar from '~/components/infoUser/UserAvatar.vue'
-// import postMessage from '~/components/infoPost/PostMessage.vue'
 import scheduleCardInfoInit from '~/components/infoPost/ScheduleCardInfoInit.vue'
 import theModalLogin from '~/components/layouts/TheModalLogin.vue'
 
@@ -332,15 +315,7 @@ export default {
   text-shadow: 2px 2px 3px #ffffff;
   border-bottom: double;
 }
-.shadow-text3 {
-  text-shadow: 2px 5px 50px;
-}
 
-svg {
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
 text {
   fill: #333;
   stroke: #fff;

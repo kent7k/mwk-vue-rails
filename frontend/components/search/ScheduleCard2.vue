@@ -16,7 +16,7 @@
         >
           <v-responsive :aspect-ratio="12 / 16" style="background-color: white">
             <v-hover>
-              <template v-slot:default="{ hover }">
+              <template #default="{ hover }">
                 <v-sheet dark flat color="white">
                   <v-img
                     v-if="p.image.url"
@@ -89,7 +89,7 @@
                         </p>
                       </div>
                     </v-card-text>
-                    <!-- 
+                    <!--
                     <v-expand-transition>
                       <div
                         v-if="hover"
@@ -151,7 +151,7 @@ export default {
   props: {
     posts: {
       type: Array,
-      default: () => ({}),
+      default: () => ([]),
       required: true,
     },
   },

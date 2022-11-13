@@ -6,6 +6,14 @@ const { RAILS_GUEST_KEY } = process.env
 const { BASE_URL } = process.env
 
 export default {
+  components: [
+    '@/components/admin',
+    '@/components/editUser',
+    '@/components/infoPost',
+    '@/components/infoUser',
+    '@/components/layouts',
+    '@/components/search',
+  ],
   ssr: false,
   /* mode: 'spa', */
   env: {

@@ -8,19 +8,21 @@
         >
           ヘルプ
         </div>
-      </div> </v-card-text
-    >
+      </div>
+    </v-card-text>
     <v-card class="ml-2 mr-2" tile rounded-card>
       <v-card-text>
-        <b>「子どもたちのネットワークに異年齢間の交友関係を作り出したい」</b><br>
-        そのような思いで制作しました。<br><br>
+        <b>「子どもたちのネットワークに異年齢間の交友関係を作り出したい」</b
+        ><br />
+        そのような思いで制作しました。<br /><br />
 
-実際に、異年齢保育/教育（０〜１２歳）の現場で親御さんに直接リサーチしたり、SNSでママパパのコミュニティの情報も毎日集めたりしたところ、<br>
-<b>子どもたちのコミュニティで異年齢間の交友が減っているという問題を認識</b>しました。
-<br><br>
-その解決のためには、ママパパのコミュニティを広げることが必要であるという経験則から、マッチングアプリを開発。<br><br>
-<b>気軽に “Let’s meet with kids!” できるようなサービス</b>を目指しました。
-
+        実際に、異年齢保育/教育（０〜１２歳）の現場で親御さんに直接リサーチしたり、SNSでママパパのコミュニティの情報も毎日集めたりしたところ、<br />
+        <b
+          >子どもたちのコミュニティで異年齢間の交友が減っているという問題を認識</b
+        >しました。 <br /><br />
+        その解決のためには、ママパパのコミュニティを広げることが必要であるという経験則から、マッチングアプリを開発。<br /><br />
+        <b>気軽に “Let’s meet with kids!” できるようなサービス</b
+        >を目指しました。
       </v-card-text>
     </v-card>
     <v-card-text class="text-center align-self-center">
@@ -234,7 +236,7 @@
       :src="require('@/assets/images/intro/hl7.png')"
     ></v-img>
     <v-card-text class="text-center align-self-center">
-      ページ右下の <v-icon color="red">mdi-pencil</v-icon> をクリック。<br>
+      ページ右下の <v-icon color="red">mdi-pencil</v-icon> をクリック。<br />
       どこからでもポストすることができます。
     </v-card-text>
     <v-card-text class="text-center align-self-center">
@@ -251,16 +253,13 @@
         ></div>
       </div>
     </v-card-text>
-    <v-img
-      contain
-      :src="require('@/assets/images/intro/hl8.png')"
-    ></v-img>
+    <v-img contain :src="require('@/assets/images/intro/hl8.png')"></v-img>
     <v-card-text class="text-center align-self-center">
-      <b>メッセージページ</b>右上の<br>
-      <v-icon color="orange">mdi-pencil</v-icon>で編集、<v-icon color="green">mdi-delete</v-icon>で削除することができます。<br>
-      
+      <b>メッセージページ</b>右上の<br />
+      <v-icon color="orange">mdi-pencil</v-icon>で編集、<v-icon color="green"
+        >mdi-delete</v-icon
+      >で削除することができます。<br />
     </v-card-text>
-
   </v-sheet>
 </template>
 

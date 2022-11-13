@@ -58,7 +58,9 @@
         </v-list>
       </v-card>
     </template>
-    <template v-else> </template>
+    <template v-else>
+      <div></div>
+    </template>
   </div>
 </template>
 
