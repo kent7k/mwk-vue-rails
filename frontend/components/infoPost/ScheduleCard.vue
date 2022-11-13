@@ -154,7 +154,6 @@ import buttonLike from '~/components/layouts/ButtonLike.vue'
 import likeCounter from '~/components/infoPost/LikeCounter.vue'
 import dialogComponent from '~/components/layouts/DialogComponent.vue'
 import userAvatar from '~/components/infoUser/UserAvatar.vue'
-import theModalLogin from '~/components/layouts/TheModalLogin.vue'
 
 export default {
   components: {
@@ -162,14 +161,7 @@ export default {
     likeCounter,
     dialogComponent,
     userAvatar,
-    theModalLogin,
   },
-  // props: {
-  //   posts: {
-  //     type: Array,
-  //     required: true,
-  //   },
-  // },
   data() {
     return {
       title: '参加メンバー',
@@ -183,9 +175,6 @@ export default {
     }
   },
   computed: {
-    reversePosts() {
-      return this.posts.slice().reverse()
-    },
     ...mapGetters({
       post: 'post/post',
       user: 'auth/loginUser',

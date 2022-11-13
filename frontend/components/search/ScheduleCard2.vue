@@ -151,7 +151,7 @@ export default {
   props: {
     posts: {
       type: Array,
-      default: () => ([]),
+      default: () => [],
       required: true,
     },
   },

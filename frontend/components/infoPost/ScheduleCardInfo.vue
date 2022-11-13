@@ -241,15 +241,12 @@
 import { mapGetters, mapActions } from 'vuex'
 import buttonLike from '~/components/layouts/ButtonLike.vue'
 import userAvatar from '~/components/infoUser/UserAvatar.vue'
-import scheduleCardInfoInit from '~/components/infoPost/ScheduleCardInfoInit.vue'
 import theModalLogin from '~/components/layouts/TheModalLogin.vue'
 
 export default {
   components: {
     buttonLike,
     userAvatar,
-    // postMessage,
-    scheduleCardInfoInit,
     theModalLogin,
   },
   props: {

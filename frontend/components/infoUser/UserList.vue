@@ -35,7 +35,7 @@ export default {
   props: {
     users: {
       type: Array,
-      default: () => ({}),
+      default: () => [],
       required: true,
     },
   },
