@@ -1,0 +1,10 @@
+overwrite: true
+schema: "./frontend/codegen/meetwithkids/schema.json"
+documents: "{,!(node_modules)/**/}*.graphql"
+generates:
+  ./src/apis/shopify/index.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+    config:
+      withHooks: true

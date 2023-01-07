@@ -44,6 +44,7 @@
     "dev": "nuxt",
     "build": "nuxt build",
     "codegen": "run-p -l codegen:*",
+    "codegen:meetwithkids": "rimraf ./frontend/src/apis/meetwithkids/ && TS_POST_PROCESS_FILE='prettier --write' openapi-generator-cli generate -i ./frontend/codegen/meetwithkids/meetwithkids.yaml -g typescript-axios -o ./src/apis/meetwithkids -c ./frontend/codegen/meetwithkids/config.json --enable-post-process-file --additional-properties=modelPropertyNaming=camelCase,supportsES6=true,withInterfaces=true,typescriptThreePlus=true",
     "start": "nuxt start",
     "generate": "nuxt generate",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore . --fix",
