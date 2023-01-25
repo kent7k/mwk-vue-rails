@@ -50,18 +50,6 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1.4.0
 
-      - name: Download task definition
-        run: |
-          aws ecs describe-task-definition --task-definition api --query taskDefinition | jq -r 'del(
-          .taskDefinitionArn,
-          .requiresAttributes,
-          .compatibilities,
-          .revision,
-          .status,
-          .registeredAt,
-          .registeredBy
-          )' > task-definition.json
-
       - name: Build and push
         id: build-image
         uses: docker/build-push-action@v3
@@ -83,13 +71,13 @@ jobs:
           .status,
           .registeredAt,
           .registeredBy
-          )' > prj-name_frontend_definition.json
+          )' > task-definition.json
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: prj-name_frontend_definition.json
+          task-definition: task-definition.json
           container-name: frontend-container
           image: ${{ steps.prep.outputs.tagged_image }}
 
