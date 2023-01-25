@@ -51,6 +51,18 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1.4.0
 
+      - name: Download task definition
+        run: |
+          aws ecs describe-task-definition --task-definition api --query taskDefinition | jq -r 'del(
+          .taskDefinitionArn,
+          .requiresAttributes,
+          .compatibilities,
+          .revision,
+          .status,
+          .registeredAt,
+          .registeredBy
+          )' > task-definition.json
+
       - name: Build and push
         id: build-image
         uses: docker/build-push-action@v3
