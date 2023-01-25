@@ -23,8 +23,6 @@ export default {
   },
   head: {
     title: 'MeetWithKids',
-    // titleTemplate: '%s - ' + process.env.npm_package_name,
-    // title: process.env.npm_package_name || '',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -36,15 +34,9 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  /*
-   ** Customize the progress-bar color
-   */
   loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
   css: [
-    '~/assets/css/global.scss',
+    '~/assets/css/global.css',
   ],
   plugins: [
     { src: '~/plugins/axios.js', ssr: false },
@@ -106,10 +98,6 @@ export default {
       },
     },
   },
-  /*
-   ** vuetify module configuration
-   ** https://github.com/nuxt-community/vuetify-module
-   */
   vuetify: {
     theme: {
       dark: false,

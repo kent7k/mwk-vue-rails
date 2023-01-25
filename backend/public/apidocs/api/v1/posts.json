@@ -1,0 +1,10 @@
+{
+  "apiVersion": "v1",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:5050",
+  "resourcePath": "posts",
+  "apis": [
+
+  ],
+  "authorizations": null
+}

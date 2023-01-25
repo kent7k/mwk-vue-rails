@@ -19,9 +19,6 @@ gem 'puma', '~> 4.1'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
-gem 'graphql'
-gem 'graphiql-rails'
-
 gem 'ffi', '1.15.5'
 
 gem 'carrierwave'
@@ -51,6 +48,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
   gem 'rspec-rails'
+  gem 'grape-swagger-rails', '~> 0.3.0'
+  gem 'swagger-docs', '~> 0.2.9'
 end
 
 group :development do
