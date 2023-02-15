@@ -1,4 +1,4 @@
-FROM node:12.5.0-alpine
+node:16.14.0-alpine3.14
 
 ARG WORKDIR
 ARG CONTAINER_PORT
@@ -19,7 +19,6 @@ COPY . .
 
 RUN apk update && \
     apk upgrade && \
-    yarn install && \
     yarn build && \
     rm -rf /var/cache/apk/*
 
