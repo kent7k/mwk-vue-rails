@@ -35,11 +35,11 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
   loading: { color: '#fff' },
-  css: ['@/assets/css/global.css'],
+  css: ['~/assets/css/global.css'],
   plugins: [
-    { src: '@/plugins/axios.js', ssr: false },
-    { src: '@/plugins/dayjs', ssr: false },
-    { src: '@/plugins/localStorage.js', ssr: false },
+    { src: '~/plugins/axios.js', ssr: false },
+    { src: '~/plugins/dayjs', ssr: false },
+    { src: '~/plugins/localStorage.js', ssr: false },
   ],
   /*
    ** Nuxt.js dev-modules
