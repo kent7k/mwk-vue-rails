@@ -136,7 +136,28 @@ jobs:
       - name: Deploy Amazon ECS task definition
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          task-definition: ${{ steps.task-def1.outputs.task-definition }}
+          service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
+          cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def2.outputs.task-definition }}
+          service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
+          cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def3.outputs.task-definition }}
+          service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
+          cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+
+      - name: Deploy Amazon ECS task definition
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def4.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
 
