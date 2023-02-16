@@ -1,7 +1,6 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
-  charset: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   host: db
@@ -20,9 +19,9 @@ test:
 
 production:
   <<: *default
+  adapter: mysql2
+  encoding: utf8mb4
+  #  url: <%= ENV['RDS_ENDPOINT'] %>
   url: terraform-20230125021324605800000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
-  # url: <%= ENV['DATABASE_URL'] %>
   database: production
   password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
-
-  
