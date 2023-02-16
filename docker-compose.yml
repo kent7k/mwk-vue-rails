@@ -123,3 +123,4 @@ volumes:
   bundle-cache:
   rails-cache:
   node_modules_volume:
+  yarn_cache:
