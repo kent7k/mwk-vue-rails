@@ -51,14 +51,15 @@ resource "aws_db_instance" "meetwithkids-db" {
   vpc_security_group_ids            = [
     aws_security_group.meetwithkids-rds-sg.id
   ]
-  parameter_group_name    = aws_db_parameter_group.meetwithkids-db-parameter.name
-  db_subnet_group_name    = aws_db_subnet_group.meetwithkids-rds-subnet-group.name
-	enabled_cloudwatch_logs_exports = [
+  parameter_group_name            = aws_db_parameter_group.meetwithkids-db-parameter.name
+  db_subnet_group_name            = aws_db_subnet_group.meetwithkids-rds-subnet-group.name
+  enabled_cloudwatch_logs_exports = [
     "audit",
     "error",
     "general",
     "slowquery",
   ]
+  publicly_accessible = true
 
   lifecycle {
     prevent_destroy = false
