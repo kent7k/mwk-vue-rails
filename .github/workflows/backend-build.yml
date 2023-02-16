@@ -3,8 +3,6 @@ name: Build & Deploy to Amazon ECS
 
 on:
   push:
-    branches:
-      - main
     paths-ignore:
       - '**/*.md'
       - 'LICENSE'
@@ -66,7 +64,7 @@ jobs:
 
       - name: Download task definition
         run: |
-          aws ecs describe-task-definition --task-definition prj-name-backend-task --query taskDefinition | jq -r 'del(
+          aws ecs describe-task-definition --task-definition meetwithkids-backend-task --query taskDefinition | jq -r 'del(
           .taskDefinitionArn,
           .requiresAttributes,
           .compatibilities,
