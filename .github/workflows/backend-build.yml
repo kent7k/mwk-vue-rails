@@ -64,7 +64,7 @@ jobs:
 
       - name: Download task definition
         run: |
-          aws ecs describe-task-definition --task-definition meetwithkids_backend_definition --query taskDefinition | jq -r 'del(
+          aws ecs describe-task-definition --task-definition meetwithkids-backend-task --query taskDefinition | jq -r 'del(
           .taskDefinitionArn,
           .requiresAttributes,
           .compatibilities,
