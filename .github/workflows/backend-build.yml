@@ -62,21 +62,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Download task definition
-        run: |
-          aws ecs describe-task-definition --task-definition prj-name-backend-task --query taskDefinition | jq -r 'del(
-          .taskDefinitionArn,
-          .requiresAttributes,
-          .compatibilities,
-          .revision,
-          .status,
-          .registeredAt,
-          .registeredBy
-          )' > meetwithkids_backend_definition.json
-
-      - name: Print task definition file
-        run: cat meetwithkids_backend_definition.json
-
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
