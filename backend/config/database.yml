@@ -6,7 +6,7 @@ default: &default
   username: root
   host: db
   # ↓↓CiecleCI に通すときはコメントアウト
-  password: <%= ENV['MYSQL_ROOT_PASSWORD'] || '' %>
+  # password: <%= ENV['MYSQL_ROOT_PASSWORD'] || '' %>
 
 development:
   <<: *default
@@ -20,9 +20,8 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-  # DATABASE_URL を .env に入れた途端に、production モードになってしまう
-# url: terraform-20221023041629708800000006.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
+  url: terraform-20230125021324605800000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
+  # url: <%= ENV['DATABASE_URL'] %>
   database: production
   password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
 
