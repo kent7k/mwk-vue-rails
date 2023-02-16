@@ -71,13 +71,16 @@ jobs:
           .status,
           .registeredAt,
           .registeredBy
-          )' > meetwithkids_frontend_definition.json
+          )' > task-definition.json
+
+      - name: Print task definition file
+        run: cat task-definition.json
 
       - name: Fill in the new image ID in the Amazon ECS task definition
         id: task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: meetwithkids_frontend_definition.json
+          task-definition: task-definition.json
           container-name: frontend-container
           image: ${{ steps.prep.outputs.tagged_image }}
 
