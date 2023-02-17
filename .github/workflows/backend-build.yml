@@ -76,7 +76,7 @@ jobs:
 
       - name: Download task definition for db-create
         run: |
-          aws ecs describe-task-definition --task-definition db-create --query taskDefinition | jq -r 'del(
+          aws ecs describe-task-definition --task-definition meetwithkids-db-create --query taskDefinition | jq -r 'del(
           .taskDefinitionArn,
           .requiresAttributes,
           .compatibilities,
