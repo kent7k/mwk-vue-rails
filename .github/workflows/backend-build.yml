@@ -74,7 +74,7 @@ jobs:
           .registeredBy
           )' > meetwithkids_backend_definition.json
 
-      - name: Download task definition for db
+      - name: Download task definition for db-create
         run: |
           aws ecs describe-task-definition --task-definition db-create --query taskDefinition | jq -r 'del(
           .taskDefinitionArn,
@@ -85,6 +85,9 @@ jobs:
           .registeredAt,
           .registeredBy
           )' > meetwithkids_db_create_definition.json
+
+      - name: Download task definition for db-migrate
+        run: |
           aws ecs describe-task-definition --task-definition meetwithkids-db-migrate --query taskDefinition | jq -r 'del(
           .taskDefinitionArn,
           .requiresAttributes,
@@ -94,6 +97,9 @@ jobs:
           .registeredAt,
           .registeredBy
           )' > meetwithkids_db_migrate_definition.json
+
+      - name: Download task definition for db-seed
+        run: |
           aws ecs describe-task-definition --task-definition meetwithkids-db-seed --query taskDefinition | jq -r 'del(
           .taskDefinitionArn,
           .requiresAttributes,
