@@ -13,17 +13,11 @@ development:
 test:
   <<: *default
   database: app_test
-  # ↓↓CiecleCI に通すときはコメントイン
-  # host: 127.0.0.1
 
 production:
   <<: *default
   adapter: mysql2
   database: production
-  username: kento
-  #  url: <%= ENV['RDS_ENDPOINT'] %>
-  url: terraform-20230125021324605800000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
-  # Just a test. It shouldn't be used in production.
-  password: 8EsZDP9TYgHdUUM7C2N7Qqeici2ReTfNtBeQ
-  #  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
-
+  username: <%= ENV['DATABASE_USER'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
