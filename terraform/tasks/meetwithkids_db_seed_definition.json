@@ -84,6 +84,5 @@
         "valueFrom": "RAILS_FOLLOWUSER_KEY"
       }
     ]
-
-    }
-  ]
+  }
+]
