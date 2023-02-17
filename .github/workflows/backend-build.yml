@@ -101,15 +101,15 @@ jobs:
           .registeredBy
           )' > meetwithkids_db_seed_definition.json
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
-        id: task-def1
+      - name: Fill in the new image ID in the Amazon ECS task definition for backend
+        id: task-def-of-backend
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: meetwithkids_backend_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
+      - name: Fill in the new image ID in the Amazon ECS task definition for db-create
         id: task-def-of-db-create
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
@@ -117,7 +117,7 @@ jobs:
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
+      - name: Fill in the new image ID in the Amazon ECS task definition for db-migrate
         id: task-def-of-db-migrate
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
@@ -125,7 +125,7 @@ jobs:
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
+      - name: Fill in the new image ID in the Amazon ECS task definition for db-seed
         id: task-def-of-db-seed
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
