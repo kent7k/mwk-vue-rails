@@ -177,3 +177,4 @@ jobs:
           task-definition: ${{ steps.task-def-of-db-seed.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+
