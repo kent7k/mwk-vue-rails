@@ -49,11 +49,11 @@
       },
       {
         "name": "DATABASE_URL",
-        "valueFrom": "RR_DATABASE_URL"
+        "valueFrom": "DATABASE_URL"
       },
       {
         "name": "RAILS_MASTER_KEY",
-        "valueFrom": "RR_RAILS_MASTER_KEY"
+        "valueFrom": "RAILS_MASTER_KEY"
       }
     ]
   }

@@ -73,6 +73,8 @@ jobs:
           .registeredAt,
           .registeredBy
           )' > meetwithkids_backend_definition.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Download task definition for db-create
         run: |
@@ -85,6 +87,8 @@ jobs:
           .registeredAt,
           .registeredBy
           )' > meetwithkids_db_create_definition.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Download task definition for db-migrate
         run: |
@@ -97,6 +101,8 @@ jobs:
           .registeredAt,
           .registeredBy
           )' > meetwithkids_db_migrate_definition.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Download task definition for db-seed
         run: |
@@ -109,6 +115,8 @@ jobs:
           .registeredAt,
           .registeredBy
           )' > meetwithkids_db_seed_definition.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition for backend
         id: task-def-of-backend
