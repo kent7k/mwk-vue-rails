@@ -62,7 +62,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Download task definition
+      - name: Download task definition for backend
         run: |
           aws ecs describe-task-definition --task-definition meetwithkids-backend-task --query taskDefinition | jq -r 'del(
           .taskDefinitionArn,
@@ -73,6 +73,9 @@ jobs:
           .registeredAt,
           .registeredBy
           )' > meetwithkids_backend_definition.json
+
+      - name: Download task definition for db
+        run: |
           aws ecs describe-task-definition --task-definition db-create --query taskDefinition | jq -r 'del(
           .taskDefinitionArn,
           .requiresAttributes,
