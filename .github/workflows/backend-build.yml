@@ -133,7 +133,7 @@ jobs:
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
 
-      - name: Deploy Amazon ECS task definition
+      - name: Deploy Amazon ECS task definition for backend
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
           task-definition: ${{ steps.task-def1.outputs.task-definition }}
