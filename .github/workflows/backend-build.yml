@@ -136,27 +136,27 @@ jobs:
       - name: Deploy Amazon ECS task definition for backend
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.task-def1.outputs.task-definition }}
+          task-definition: ${{ steps.task-def-of-backend.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
 
       - name: Deploy Amazon ECS task definition for db create
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.task-def2.outputs.task-definition }}
+          task-definition: ${{ steps.task-def-of-db-create.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
 
       - name: Deploy Amazon ECS task definition for db migrate
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.task-def3.outputs.task-definition }}
+          task-definition: ${{ steps.task-def-of-db-migrate.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
 
       - name: Deploy Amazon ECS task definition for db seed
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.task-def4.outputs.task-definition }}
+          task-definition: ${{ steps.task-def-of-db-seed.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
