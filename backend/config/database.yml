@@ -22,7 +22,7 @@ production:
   database: production
   username: kento
   #  url: <%= ENV['RDS_ENDPOINT'] %>
-  host: terraform-20230125021324605800000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
+  url: terraform-20230125021324605800000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
   # Just a test. It shouldn't be used in production.
   password: 8EsZDP9TYgHdUUM7C2N7Qqeici2ReTfNtBeQ
   #  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
