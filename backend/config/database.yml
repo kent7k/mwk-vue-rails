@@ -21,8 +21,7 @@ test:
 production:
   <<: *default
   url: <%= ENV['DATABASE_URL'] %>
-  # DATABASE_URL を .env に入れた途端に、production モードになってしまう
-# url: terraform-20221023041629708800000006.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
+  username: kento
   database: production
   password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
 
