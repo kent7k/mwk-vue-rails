@@ -15,14 +15,15 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 // import deleteUser from '~/components/editUser/DeleteUser.vue'
 // import editAvatar from '~/components/editUser/EditAvatar.vue'
 // import editEmail from '~/components/editUser/EditEmail.vue'
 // import editPassword from '~/components/editUser/EditPassword.vue'
 // import editProfile from '~/components/editUser/EditProfile.vue'
 // import userAvatar from '~/components/infoUser/UserAvatar.vue'
-import theAccountSettingDialogComponent from '~/components/editUser/TheAccountSettingDialogComponent.vue'
+import theAccountSettingDialogComponent
+  from '~/components/editUser/TheAccountSettingDialogComponent.vue'
 
 export default {
   components: {
@@ -44,7 +45,7 @@ export default {
     return {
       dialog: false,
       dialogComponent: false,
-      defaultImage: 'http://localhost:5050/fallback/default.png',
+      defaultImage: 'http://localhost:5001/fallback/default.png',
       tab: null,
     }
   },

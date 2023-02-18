@@ -113,11 +113,12 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import theAccountSettingDialog from '~/components/editUser/TheAccountSettingDialog.vue'
+import {mapActions, mapGetters} from 'vuex'
+import theAccountSettingDialog
+  from '~/components/editUser/TheAccountSettingDialog.vue'
+import userAvatar from '~/components/infoUser/UserAvatar.vue'
 import userMessageList from '~/components/infoUser/UserMessageList.vue'
 import userPostList from '~/components/infoUser/UserPostList.vue'
-import userAvatar from '~/components/infoUser/UserAvatar.vue'
 
 export default {
   name: 'ListComponent',
@@ -130,7 +131,7 @@ export default {
   data() {
     return {
       dialog: false,
-      defaultImage: 'http://localhost:5050/fallback/default.png',
+      defaultImage: 'http://localhost:5001/fallback/default.png',
       tab: null,
     }
   },

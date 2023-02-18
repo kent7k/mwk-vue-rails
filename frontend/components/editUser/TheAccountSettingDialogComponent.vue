@@ -139,7 +139,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import {mapActions, mapGetters} from 'vuex'
 import deleteUser from '~/components/editUser/DeleteUser.vue'
 import editAvatar from '~/components/editUser/EditAvatar.vue'
 import editEmail from '~/components/editUser/EditEmail.vue'
@@ -167,7 +167,7 @@ export default {
   data() {
     return {
       dialog: false,
-      defaultImage: 'http://localhost:5050/fallback/default.png',
+      defaultImage: 'http://localhost:5001/fallback/default.png',
       tab: null,
       items: [
         {
