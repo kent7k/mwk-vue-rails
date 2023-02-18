@@ -75,6 +75,7 @@ jobs:
           )' > meetwithkids_backend_definition.json
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Download task definition for db-create
         run: |
@@ -89,6 +90,7 @@ jobs:
           )' > meetwithkids_db_create_definition.json
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Download task definition for db-migrate
         run: |
@@ -103,6 +105,7 @@ jobs:
           )' > meetwithkids_db_migrate_definition.json
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Download task definition for db-seed
         run: |
@@ -117,6 +120,7 @@ jobs:
           )' > meetwithkids_db_seed_definition.json
         env:
           DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition for backend
         id: task-def-of-backend
