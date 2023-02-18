@@ -19,6 +19,6 @@ production:
   adapter: mysql2
   database: production
   username: kento
-  url: terraform-20230125021324605800000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
+  url: terraform-20230218010631604700000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
   password: 8EsZDP9TYgHdUUM7C2N7Qqeici2ReTfNtBeQ
   # Just a test. It shouldn't be used in production.
