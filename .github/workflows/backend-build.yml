@@ -129,6 +129,9 @@ jobs:
           task-definition: meetwithkids_backend_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition for db-create
         id: task-def-of-db-create
@@ -137,6 +140,9 @@ jobs:
           task-definition: meetwithkids_db_create_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition for db-migrate
         id: task-def-of-db-migrate
@@ -145,6 +151,9 @@ jobs:
           task-definition: meetwithkids_db_migrate_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition for db-seed
         id: task-def-of-db-seed
@@ -153,6 +162,9 @@ jobs:
           task-definition: meetwithkids_db_seed_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Deploy Amazon ECS task definition for backend
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -160,6 +172,9 @@ jobs:
           task-definition: ${{ steps.task-def-of-backend.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Deploy Amazon ECS task definition for db create
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -167,6 +182,9 @@ jobs:
           task-definition: ${{ steps.task-def-of-db-create.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Deploy Amazon ECS task definition for db migrate
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -174,6 +192,9 @@ jobs:
           task-definition: ${{ steps.task-def-of-db-migrate.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Deploy Amazon ECS task definition for db seed
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -181,4 +202,7 @@ jobs:
           task-definition: ${{ steps.task-def-of-db-seed.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
