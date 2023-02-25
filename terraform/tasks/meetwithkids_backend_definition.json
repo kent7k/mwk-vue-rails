@@ -26,7 +26,7 @@
       {
         "name": "WORKDIR",
         "value": "app"
-     },
+      },
       {
         "name": "CONTAINER_PORT",
         "value": "3000"
@@ -34,16 +34,14 @@
       {
         "name": "RAILS_ENV",
         "value": "production"
-      }
-    ],
-    "secrets": [
+      },
       {
         "name": "DATABASE_URL",
-        "valueFrom": "terraform-20230225033756705300000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com"
+        "value": "terraform-20230225033756705300000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com"
       },
       {
         "name": "RAILS_MASTER_KEY",
-        "valueFrom": "567f18a0f3d227d0a02bd94645378c2b"
+        "value": "567f18a0f3d227d0a02bd94645378c2b"
       }
     ]
   }
