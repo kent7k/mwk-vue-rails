@@ -120,9 +120,6 @@ jobs:
           task-definition: ${{ steps.task-def-of-backend.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Deploy Amazon ECS task definition for db prepare
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
@@ -130,6 +127,3 @@ jobs:
           task-definition: ${{ steps.task-def-of-db-prepare.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}

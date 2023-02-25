@@ -47,11 +47,11 @@
     "secrets": [
       {
         "name": "DATABASE_URL",
-        "valueFrom": "terraform-20230225033756705300000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com"
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/DATABASE_URL"
       },
       {
         "name": "RAILS_MASTER_KEY",
-        "valueFrom": "567f18a0f3d227d0a02bd94645378c2b"
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_MASTER_KEY"
       },
       {
         "name": "RAILS_ADMIN_USER",
