@@ -1,92 +1,49 @@
 version: "3.7"
 
 services:
-  db:
-    container_name: db
-    platform: linux/x86_64
-#    image: mysql:5.7
-    image: mysql:8.0.20
-    command: --default-authentication-plugin=mysql_native_password
+  mwk-db:
+    image: mysql:8.0
     environment:
-      - MYSQL_ROOT_PASSWORD
-      - MYSQL_ALLOW_EMPTY_PASSWORD
-#    restart: always
-#    volumes:
-#      - db-data:/var/lib/mysql:cached
+      TZ: Asia/Tokyo
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
+    restart: always
     volumes:
-      - db-data:/var/lib/mysql
-    ports:
-      - ${MYSQL_FORWARDED_PORT:-3306}:3306
-      - ${MYSQL_FORWARDED_X_PORT:-33060}:33060
-#    ports:
-#      - 3307:3306
-#    networks:
-#      app_net:
-#        ipv4_address: '172.21.0.2'
+      - /var/lib/docker/volumes/mwk-db-data:/var/lib/mysql:cached
 
-  base: &base
+  backend:
     build:
       context: ./backend
-      dockerfile: ./Dockerfile.prd
-      cache_from:
-        - rails6api-development-cache
       args:
-        ARG_RUBY_VERSION: ${ARG_RUBY_VERSION:-2.7.1}
         WORKDIR: $WORKDIR
         CONTAINER_PORT: $CONTAINER_PORT
-    image: rails6api-development:0.1.0
-    tmpfs:
-      - /tmp
-
-  wait-middleware: &wait-middleware
-    <<: *base
-    environment:
-      WAIT_HOSTS: db:3306
-    depends_on:
-      - db
-    command: /wait
-
-  backend: &backend
-    <<: *base
-    stdin_open: true
-    tty: true
-    container_name: mwk-backend
-#    build: ./backend/
-#    image: backend
+    #    container_name: backend
+    #    build: ./backend/
+    #    image: backend
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
       API_DOMAIN: "localhost:$FRONT_PORT"
+    stdin_open: true
+    tty: true
     depends_on:
       - db
     ports:
-      - "5050:3000"
-#      - ${API_PORT:-5050}:${CONTAINER_PORT:-3000}
+      - 5001:3000
+    #      - "$API_PORT:$CONTAINER_PORT"
     volumes:
       - ./backend:/$WORKDIR:cached
-#      - ./:/app:cached
-      - ${GEMS_CACHE_DIR:-bundle-cache}:/bundle
-      - rails-cache:/app/tmp/cache
-
-  console:
-    <<: *backend
-    ports:
-      - "3333:3000"
-    command: /bin/bash
-
-  server:
-    <<: *backend
-    ports:
-      - "3333:3000"
-    #    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
-    command: bash -c "rm -f tmp/pids/server.pid && rails s -p 3000 -b 0.0.0.0"
-
+      - bundle_data:/usr/local/bundle:cached
+      - /app/vendor
+      - /app/tmp
+      - /app/log
+      - /app/.git
   #    networks:
   #      app_net:
   #        ipv4_address: '172.21.0.3'
 
-
-  frontend:
+  mwk-frontend:
     build:
       context: ./frontend
       args:
@@ -98,12 +55,13 @@ services:
     #    build: ./frontend/
     #    image: frontend
     volumes:
-      - ./frontend:/$WORKDIR:cached
       - node_modules_volume:/$WORKDIR/node_modules
+      - /home/user/app/frontend:/app:cached
+      - /var/lib/docker/volumes/mwk-node-modules/_data:/app/node_modules
     # node_modulesはホストと共有しないでvolumeマウント
     ports:
-      - "3000:3000"
-      - "$FRONT_PORT:$CONTAINER_PORT"
+      - 3000:80
+    #    - "$FRONT_PORT:$CONTAINER_PORT"
     #    networks:
     #      app_net:
     #        ipv4_address: '172.21.0.4'
@@ -119,7 +77,9 @@ services:
 #        - subnet: 172.21.0.0/24
 
 volumes:
-  db-data:
-  bundle-cache:
+  mwk-db-data:
+  mwk-bundle-cache:
+  mwk-node-modules:
+  bundle_data:
   rails-cache:
-  node_modules_volume:
+  yarn_cache:

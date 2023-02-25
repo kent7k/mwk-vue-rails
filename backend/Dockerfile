@@ -15,6 +15,7 @@ RUN apk update && \
     apk upgrade && \
     apk add --update --no-cache ${RUNTIME_PACKAGES} && \
     apk add --update --virtual build-dependencies --no-cache ${DEV_PACKAGES} && \
+    gem install bundler && \
     bundle install -j4 && \
     bundle config set force_ruby_platform true && \
     apk del build-dependencies && \
@@ -24,9 +25,6 @@ RUN apk update && \
     /tmp/* \
     /usr/lib/mysqld* \
     /usr/bin/mysql*
-
-RUN gem install bundler
-RUN bundle install
 
 ADD . /app
 CMD ["rails", "server", "-b", "0.0.0.0", "RAILS_ENV=development"]

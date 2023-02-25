@@ -47,7 +47,7 @@ jobs:
 
       - name: Login to Amazon ECR
         id: login-ecr
-        uses: aws-actions/amazon-ecr-login@v1.4.0
+        uses: aws-actions/amazon-ecr-login@v1
 
       - name: Build and push
         id: build-image
@@ -62,7 +62,7 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Download task definition
+      - name: Download task definition for backend
         run: |
           aws ecs describe-task-definition --task-definition meetwithkids-backend-task --query taskDefinition | jq -r 'del(
           .taskDefinitionArn,
@@ -72,22 +72,136 @@ jobs:
           .status,
           .registeredAt,
           .registeredBy
-          )' > task-definition.json
+          )' > meetwithkids_backend_definition.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
-      - name: Print task definition file
-        run: cat task-definition.json
+      - name: Download task definition for db-create
+        run: |
+          aws ecs describe-task-definition --task-definition meetwithkids-db-create --query taskDefinition | jq -r 'del(
+          .taskDefinitionArn,
+          .requiresAttributes,
+          .compatibilities,
+          .revision,
+          .status,
+          .registeredAt,
+          .registeredBy
+          )' > meetwithkids_db_create_definition.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
-      - name: Fill in the new image ID in the Amazon ECS task definition
-        id: task-def
+      - name: Download task definition for db-migrate
+        run: |
+          aws ecs describe-task-definition --task-definition meetwithkids-db-migrate --query taskDefinition | jq -r 'del(
+          .taskDefinitionArn,
+          .requiresAttributes,
+          .compatibilities,
+          .revision,
+          .status,
+          .registeredAt,
+          .registeredBy
+          )' > meetwithkids_db_migrate_definition.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+      - name: Download task definition for db-seed
+        run: |
+          aws ecs describe-task-definition --task-definition meetwithkids-db-seed --query taskDefinition | jq -r 'del(
+          .taskDefinitionArn,
+          .requiresAttributes,
+          .compatibilities,
+          .revision,
+          .status,
+          .registeredAt,
+          .registeredBy
+          )' > meetwithkids_db_seed_definition.json
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+      - name: Fill in the new image ID in the Amazon ECS task definition for backend
+        id: task-def-of-backend
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
-          task-definition: task-definition.json
+          task-definition: meetwithkids_backend_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
-      - name: Deploy Amazon ECS task definition
+      - name: Fill in the new image ID in the Amazon ECS task definition for db-create
+        id: task-def-of-db-create
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: meetwithkids_db_create_definition.json
+          container-name: backend-container
+          image: ${{ steps.prep.outputs.tagged_image }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+      - name: Fill in the new image ID in the Amazon ECS task definition for db-migrate
+        id: task-def-of-db-migrate
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: meetwithkids_db_migrate_definition.json
+          container-name: backend-container
+          image: ${{ steps.prep.outputs.tagged_image }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+      - name: Fill in the new image ID in the Amazon ECS task definition for db-seed
+        id: task-def-of-db-seed
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: meetwithkids_db_seed_definition.json
+          container-name: backend-container
+          image: ${{ steps.prep.outputs.tagged_image }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+      - name: Deploy Amazon ECS task definition for backend
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
-          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          task-definition: ${{ steps.task-def-of-backend.outputs.task-definition }}
           service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
           cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+      - name: Deploy Amazon ECS task definition for db create
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def-of-db-create.outputs.task-definition }}
+          service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
+          cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+      - name: Deploy Amazon ECS task definition for db migrate
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def-of-db-migrate.outputs.task-definition }}
+          service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
+          cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+
+      - name: Deploy Amazon ECS task definition for db seed
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def-of-db-seed.outputs.task-definition }}
+          service: ${{ secrets.AWS_ECS_SERVICE__BACK }}
+          cluster: ${{ secrets.AWS_ECS_CLUSTER }}
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}

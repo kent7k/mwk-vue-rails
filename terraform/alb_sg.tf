@@ -36,12 +36,12 @@ resource "aws_security_group_rule" "meetwithkids-alb-sg-rule4" {
   security_group_id = aws_security_group.meetwithkids-alb-sg.id
 }
 resource "aws_security_group_rule" "meetwithkids-alb-sg-rule5" {
-  description       = "meetwithkids-alb-sg-rule5"
-  type              = "ingress"
-  from_port         = 5000
-  to_port           = 5000
-/*from_port         = 8080
-  to_port           = 8080 */
+  description = "meetwithkids-alb-sg-rule5"
+  type        = "ingress"
+  from_port   = 5001
+  to_port     = 5001
+  /*from_port         = 8080
+    to_port           = 8080 */
   protocol          = "tcp"
   cidr_blocks       = ["0.0.0.0/0"]
   security_group_id = aws_security_group.meetwithkids-alb-sg.id

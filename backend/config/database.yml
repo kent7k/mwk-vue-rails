@@ -1,11 +1,9 @@
 default: &default
   adapter: mysql2
   encoding: utf8mb4
-  charset: utf8mb4
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   host: db
-  # ↓↓CiecleCI に通すときはコメントアウト
   password: <%= ENV['MYSQL_ROOT_PASSWORD'] || '' %>
 
 development:
@@ -15,15 +13,12 @@ development:
 test:
   <<: *default
   database: app_test
-  # ↓↓CiecleCI に通すときはコメントイン
-  host: 127.0.0.1
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
-  # DATABASE_URL を .env に入れた途端に、production モードになってしまう
-# url: terraform-20221023041629708800000006.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com
+  adapter: mysql2
   database: production
-  password: <%= ENV['MYSQL_ROOT_PASSWORD'] %>
-
-  
+  username: kento
+  url: ''
+  password: ''
+  # Just a test. It shouldn't be used in production.

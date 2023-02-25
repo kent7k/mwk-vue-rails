@@ -47,11 +47,11 @@
       },
       {
         "name": "DATABASE_URL",
-        "valueFrom": "RR_DATABASE_URL"
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/DATABASE_URL"
       },
       {
         "name": "RAILS_MASTER_KEY",
-        "valueFrom": "RR_RAILS_MASTER_KEY"
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_MASTER_KEY"
       }
     ]
   }

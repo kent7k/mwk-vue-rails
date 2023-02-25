@@ -37,7 +37,7 @@ services:
     depends_on:
       - db
     ports:
-      - "5050:3000"
+      - "5001:3000"
     #      - ${API_PORT:-5050}:${CONTAINER_PORT:-3000}
     volumes:
       - ./backend:/$WORKDIR:cached
