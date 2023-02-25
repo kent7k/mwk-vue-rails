@@ -131,4 +131,5 @@ Rails.application.configure do
                           :sender_address => %{"Error Notification" <notification@mydomain.com>},
                           :exception_recipients => %w{administrator@mydomain.com}
                         }
+
 end
