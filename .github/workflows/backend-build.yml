@@ -73,9 +73,6 @@ jobs:
           .registeredAt,
           .registeredBy
           )' > meetwithkids_backend_definition.json
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Download task definition for db-prepare
         run: |
@@ -88,9 +85,6 @@ jobs:
           .registeredAt,
           .registeredBy
           )' > meetwithkids_db_prepare_definition.json
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition for backend
         id: task-def-of-backend
@@ -100,8 +94,6 @@ jobs:
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
         env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Fill in the new image ID in the Amazon ECS task definition for db-prepare
         id: task-def-of-db-prepare
