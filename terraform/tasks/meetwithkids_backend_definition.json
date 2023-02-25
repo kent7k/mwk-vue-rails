@@ -47,11 +47,11 @@
       },
       {
         "name": "DATABASE_URL",
-        "valueFrom": "terraform-20230218010631604700000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com"
+        "valueFrom": "DATABASE_URL"
       },
       {
         "name": "RAILS_MASTER_KEY",
-        "valueFrom": "605ef7e085e10b3848dd33d2691900af"
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_MASTER_KEY"
       }
     ]
   }
