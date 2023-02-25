@@ -47,7 +47,7 @@
       },
       {
         "name": "DATABASE_URL",
-        "valueFrom": "DATABASE_URL"
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/DATABASE_URL"
       },
       {
         "name": "RAILS_MASTER_KEY",
