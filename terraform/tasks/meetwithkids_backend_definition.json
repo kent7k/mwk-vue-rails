@@ -51,7 +51,7 @@
       },
       {
         "name": "RAILS_MASTER_KEY",
-        "valueFrom": "RAILS_MASTER_KEY"
+        "valueFrom": "605ef7e085e10b3848dd33d2691900af"
       }
     ]
   }
