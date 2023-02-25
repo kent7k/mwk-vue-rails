@@ -130,4 +130,5 @@ Rails.application.configure do
       :sender_address       => %{"notifier" <notifier@example.com>},
       :exception_recipients => %w{exceptions@example.com}
     }
+
 end
