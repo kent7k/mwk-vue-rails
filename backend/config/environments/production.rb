@@ -123,4 +123,12 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
+
+  config.middleware.use ExceptionNotification::Rack,
+                        :ignore_exceptions => ['ActionController::UnknownHttpMethod'] + ExceptionNotifier.ignored_exceptions, # I added this line
+                        :email => {
+                          :email_prefix => "[ERROR]",
+                          :sender_address => %{"Error Notification" <notification@mydomain.com>},
+                          :exception_recipients => %w{administrator@mydomain.com}
+                        }
 end
