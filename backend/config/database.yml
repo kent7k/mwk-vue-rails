@@ -19,6 +19,6 @@ production:
   adapter: mysql2
   database: production
   username: kento
-  url: ''
-  password: ''
+  url: <%= ENV['DATABASE_URL'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   # Just a test. It shouldn't be used in production.

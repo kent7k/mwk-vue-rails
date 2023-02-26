@@ -107,14 +107,26 @@ resource "aws_ecs_task_definition" "db-migrate" {
 
 /* Task for Seeds */
 resource "aws_ecs_task_definition" "db-seed" {
-    family                   = "meetwithkids-db-seed"
-    container_definitions    = file("./tasks/meetwithkids_db_seed_definition.json")
-    requires_compatibilities = ["FARGATE"]
-    network_mode             = "awsvpc"
-    cpu                      = "256"
-    memory                   = "512"
-    execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
-  }
+  family                   = "meetwithkids-db-seed"
+  container_definitions    = file("./tasks/meetwithkids_db_seed_definition.json")
+  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc"
+  cpu                      = "256"
+  memory                   = "512"
+  execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
+}
+
+/* Task for Prepare */
+resource "aws_ecs_task_definition" "db-prepare" {
+  family                   = "meetwithkids-db-prepare"
+  container_definitions    = file("./tasks/meetwithkids_db_prepare_definition.json")
+  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc"
+  cpu                      = "256"
+  memory                   = "512"
+  execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
+}
+
 
 /* data */
 data "aws_ecs_task_definition" "meetwithkids-frontend-task" {
