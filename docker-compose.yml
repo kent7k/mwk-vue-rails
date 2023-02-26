@@ -39,9 +39,6 @@ services:
       - /app/tmp
       - /app/log
       - /app/.git
-  #    networks:
-  #      app_net:
-  #        ipv4_address: '172.21.0.3'
 
   mwk-frontend:
     build:
@@ -58,23 +55,10 @@ services:
       - node_modules_volume:/$WORKDIR/node_modules
       - /home/user/app/frontend:/app:cached
       - /var/lib/docker/volumes/mwk-node-modules/_data:/app/node_modules
-    # node_modulesはホストと共有しないでvolumeマウント
     ports:
       - 3000:80
-    #    - "$FRONT_PORT:$CONTAINER_PORT"
-    #    networks:
-    #      app_net:
-    #        ipv4_address: '172.21.0.4'
     depends_on:
       - backend
-
-#networks:
-#  app_net:
-#    driver: bridge
-#    ipam:
-#      driver: default
-#      config:
-#        - subnet: 172.21.0.0/24
 
 volumes:
   mwk-db-data:
