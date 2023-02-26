@@ -139,25 +139,25 @@ workflows:
       - test_backend:
           filters:
             branches:
-              only: apply_for_kms
+              only: master
       - test_frontend:
           filters:
             branches:
-              only: apply_for_kms
+              only: master
       - build_and_push_image_backend:
           requires:
            - test_frontend
            - test_backend
           filters:
             branches:
-              only: apply_for_kms
+              only: master
       - build_and_push_image_frontend:
           requires:
             - test_frontend
             - test_backend
           filters:
             branches:
-              only: apply_for_kms
+              only: master
       - aws-ecs/update-task-definition:
           # family: meetwithkids-db-migrate
           family: meetwithkids-db-seed
@@ -167,7 +167,7 @@ workflows:
             - build_and_push_image_backend
           filters:
             branches:
-              only: apply_for_kms
+              only: master
 
       - aws-ecs/run-task:
           cluster: meetwithkids-ecs-cluster
@@ -180,7 +180,7 @@ workflows:
             - aws-ecs/update-task-definition
           filters:
             branches:
-              only: apply_for_kms
+              only: master
 
       - aws-ecs/deploy-service-update:
             family: meetwithkids-frontend-task
@@ -191,7 +191,7 @@ workflows:
               - build_and_push_image_frontend
             filters:
               branches:
-                only: apply_for_kms
+                only: master
       - aws-ecs/deploy-service-update:
             requires:
               - build_and_push_image_frontend
@@ -202,4 +202,4 @@ workflows:
             container-image-name-updates: 'container=backend-container,tag=${CIRCLE_SHA1}'
             filters:
               branches:
-                only: apply_for_kms
+                only: master
