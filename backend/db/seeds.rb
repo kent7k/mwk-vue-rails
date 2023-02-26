@@ -1,6 +1,6 @@
 User.create!(
   name: ENV['RAILS_ADMIN_USER'],
-  email: 'kent.ki720@gmail.com',
+  email: ENV['RAILS_ADMIN_ADDRESS'],
   password: ENV['RAILS_ADMIN_KEY'],
   password_confirmation: ENV['RAILS_ADMIN_KEY'],
   admin: true
@@ -30,7 +30,7 @@ User.create!(
 
 User.create!(
   name: ENV['RAILS_GUEST_USER'],
-  email: 'tester9520@gmail.com',
+  email: ENV['RAILS_GUEST_ADDRESS'],
   password: ENV['RAILS_GUEST_KEY'],
   password_confirmation: ENV['RAILS_GUEST_KEY'],
   admin: false,
