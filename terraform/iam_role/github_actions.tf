@@ -62,7 +62,10 @@ data "aws_iam_policy_document" "github_actions_resource_role_policy" {
       "ecr:InitiateLayerUpload",
       "ecr:UploadLayerPart",
       "ecr:CompleteLayerUpload",
-      "ecr:GetAuthorizationToken"
+      "ecr:GetAuthorizationToken",
+      "ssm:GetParameters",
+      "secretsmanager:GetSecretValue",
+      "kms:Decrypt"
     ]
     resources = ["*"]
     effect    = "Allow"

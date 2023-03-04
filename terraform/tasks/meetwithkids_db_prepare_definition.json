@@ -1,0 +1,86 @@
+[
+  {
+    "name": "backend-container",
+    "image": "700347967260.dkr.ecr.ap-northeast-1.amazonaws.com/meetwithkids-backend",
+    "essential": true,
+    "logConfiguration": {
+      "logDriver": "awslogs",
+      "options": {
+        "awslogs-region": "ap-northeast-1",
+        "awslogs-stream-prefix": "db-prepare",
+        "awslogs-group": "/ecs/db-prepare"
+      }
+    },
+    "portMappings": [
+      {
+        "protocol": "tcp",
+        "containerPort": 3000,
+        "hostPort": 3000
+      }
+    ],
+    "entryPoint": [
+      "bundle",
+      "exec",
+      "rails",
+      "db:prepare",
+      "--trace"
+    ],
+    "workingDirectory": "/app",
+    "environment": [
+      {
+        "name": "API_DOMAIN",
+        "value": "https://meetwithkids.org"
+      },
+      {
+        "name": "WORKDIR",
+        "value": "app"
+      },
+      {
+        "name": "CONTAINER_PORT",
+        "value": "3000"
+      },
+      {
+        "name": "RAILS_ENV",
+        "value": "production"
+      }
+    ],
+    "secrets": [
+      {
+        "name": "DATABASE_URL",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/DATABASE_URL"
+      },
+      {
+        "name": "RAILS_MASTER_KEY",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_MASTER_KEY"
+      },
+      {
+        "name": "RAILS_ADMIN_USER",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_ADMIN_USER"
+      },
+      {
+        "name": "RAILS_ADMIN_ADDRESS",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_ADMIN_ADDRESS"
+      },
+      {
+        "name": "RAILS_ADMIN_KEY",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_ADMIN_KEY"
+      },
+      {
+        "name": "RAILS_GUEST_USER",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_GUEST_USER"
+      },
+      {
+        "name": "RAILS_GUEST_ADDRESS",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_GUEST_ADDRESS"
+      },
+      {
+        "name": "RAILS_GUEST_KEY",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_GUEST_KEY"
+      },
+      {
+        "name": "RAILS_FOLLOWUSER_KEY",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RAILS_FOLLOWUSER_KEY"
+      }
+    ]
+  }
+]
