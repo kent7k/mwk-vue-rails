@@ -93,7 +93,6 @@ jobs:
           task-definition: meetwithkids_backend_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
-        env:
 
       - name: Fill in the new image ID in the Amazon ECS task definition for db-prepare
         id: task-def-of-db-prepare
