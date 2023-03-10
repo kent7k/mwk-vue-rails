@@ -67,3 +67,4 @@ volumes:
   bundle_data:
   rails-cache:
   yarn_cache:
+
