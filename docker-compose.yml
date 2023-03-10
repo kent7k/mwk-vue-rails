@@ -5,7 +5,7 @@ services:
     image: mysql:8.0
     environment:
       TZ: Asia/Tokyo
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      DATABASE_PASSWORD: $DATABASE_PASSWORD
       MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
     restart: always
     volumes:
@@ -22,7 +22,7 @@ services:
     #    image: backend
     command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      DATABASE_PASSWORD: $DATABASE_PASSWORD
       MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
       API_DOMAIN: "localhost:$FRONT_PORT"
     stdin_open: true
