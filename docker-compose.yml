@@ -1,8 +1,8 @@
 version: "3.7"
 
 services:
-  mwk-db:
-    image: mysql:8.0
+  db:
+    image: mysql:5.7
     environment:
       TZ: Asia/Tokyo
       DATABASE_PASSWORD: $DATABASE_PASSWORD
@@ -40,7 +40,7 @@ services:
       - /app/log
       - /app/.git
 
-  mwk-frontend:
+  frontend:
     build:
       context: ./frontend
       args:
