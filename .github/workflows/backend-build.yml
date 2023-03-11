@@ -101,9 +101,6 @@ jobs:
           task-definition: meetwithkids_db_prepare_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Deploy Amazon ECS task definition for backend
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
