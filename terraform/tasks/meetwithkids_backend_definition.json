@@ -38,8 +38,20 @@
     ],
     "secrets": [
       {
+        "name": "AWS_ACCESS_KEY_ID",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RR_AWS_ACCESS_KEY_ID"
+      },
+      {
+        "name": "AWS_SECRET_ACCESS_KEY",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/RR_AWS_SECRET_ACCESS_KEY"
+      },
+      {
         "name": "DATABASE_URL",
         "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/DATABASE_URL"
+      },
+      {
+        "name": "DATABASE_PASSWORD",
+        "valueFrom": "arn:aws:ssm:ap-northeast-1:700347967260:parameter/DATABASE_PASSWORD"
       },
       {
         "name": "RAILS_MASTER_KEY",

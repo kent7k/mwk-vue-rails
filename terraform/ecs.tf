@@ -83,38 +83,38 @@ resource "aws_ecs_service" "meetwithkids-frontend-ecs-service" {
   }
 }
 
-/* Tasks for Create */
-resource "aws_ecs_task_definition" "db-create" {
-  family                   = "meetwithkids-db-create"
-  container_definitions    = file("./tasks/meetwithkids_db_create_definition.json")
-  requires_compatibilities = ["FARGATE"]
-  network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
-  execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
-}
-
-/* Tasks for Migration */
-resource "aws_ecs_task_definition" "db-migrate" {
-  family                   = "meetwithkids-db-migrate"
-  container_definitions    = file("./tasks/meetwithkids_db_migrate_definition.json")
-  requires_compatibilities = ["FARGATE"]
-  network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
-  execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
-}
-
-/* Task for Seeds */
-resource "aws_ecs_task_definition" "db-seed" {
-  family                   = "meetwithkids-db-seed"
-  container_definitions    = file("./tasks/meetwithkids_db_seed_definition.json")
-  requires_compatibilities = ["FARGATE"]
-  network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
-  execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
-}
+#/* Tasks for Create */
+#resource "aws_ecs_task_definition" "db-create" {
+#  family                   = "meetwithkids-db-create"
+#  container_definitions    = file("./tasks/meetwithkids_db_create_definition.json")
+#  requires_compatibilities = ["FARGATE"]
+#  network_mode             = "awsvpc"
+#  cpu                      = "256"
+#  memory                   = "512"
+#  execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
+#}
+#
+#/* Tasks for Migration */
+#resource "aws_ecs_task_definition" "db-migrate" {
+#  family                   = "meetwithkids-db-migrate"
+#  container_definitions    = file("./tasks/meetwithkids_db_migrate_definition.json")
+#  requires_compatibilities = ["FARGATE"]
+#  network_mode             = "awsvpc"
+#  cpu                      = "256"
+#  memory                   = "512"
+#  execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
+#}
+#
+#/* Task for Seeds */
+#resource "aws_ecs_task_definition" "db-seed" {
+#  family                   = "meetwithkids-db-seed"
+#  container_definitions    = file("./tasks/meetwithkids_db_seed_definition.json")
+#  requires_compatibilities = ["FARGATE"]
+#  network_mode             = "awsvpc"
+#  cpu                      = "256"
+#  memory                   = "512"
+#  execution_role_arn       = module.ecs_task_execution_role.iam_role_arn
+#}
 
 /* Task for Prepare */
 resource "aws_ecs_task_definition" "db-prepare" {

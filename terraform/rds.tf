@@ -4,7 +4,7 @@ variable "aws_db_password" {}
 
 resource "aws_db_parameter_group" "meetwithkids-db-parameter" {
   name   = "meetwithkids-db-parameter"
-  family = "mysql8.0"
+  family = "mysql5.7"
 
   parameter {
     name  = "character_set_database"
@@ -38,7 +38,7 @@ resource "aws_db_instance" "meetwithkids-db" {
   allocated_storage       = 20
   instance_class          = "db.t2.micro"
   engine                  = "MySQL"
-  engine_version          = "8.0.28"
+  engine_version          = "5.7.40"
   storage_type            = "gp2"
   db_name                 = "production"
   username                = var.aws_db_user
