@@ -17,7 +17,7 @@ test:
 
 production:
   <<: *default
-  url: <%= ENV['DATABASE_URL'] %>
+  url: <%= ENV['DATABASE_URL'] || 'terraform-20230311014306944900000001.cbch251i7aoz.ap-northeast-1.rds.amazonaws.com' %>
   database: production
-  password: <%= ENV['DATABASE_PASSWORD'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] || '8EsZDP9TYgHdUUM7C2N7Qqeici2ReTfNtBeQ' %>
   # Just a test. It shouldn't be used in production.
