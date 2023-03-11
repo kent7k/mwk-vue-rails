@@ -61,6 +61,9 @@ jobs:
           tags: ${{ steps.prep.outputs.tagged_image }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Download task definition for backend
         run: |
@@ -93,7 +96,6 @@ jobs:
           task-definition: meetwithkids_backend_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
-        env:
 
       - name: Fill in the new image ID in the Amazon ECS task definition for db-prepare
         id: task-def-of-db-prepare
@@ -102,9 +104,6 @@ jobs:
           task-definition: meetwithkids_db_prepare_definition.json
           container-name: backend-container
           image: ${{ steps.prep.outputs.tagged_image }}
-        env:
-          DATABASE_URL: ${{ secrets.DATABASE_URL }}
-          RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
 
       - name: Deploy Amazon ECS task definition for backend
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
