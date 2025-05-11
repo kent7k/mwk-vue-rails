@@ -1,4 +1,4 @@
-FROM ruby:2.7.1-alpine3.11
+FROM ruby:2.7.8-alpine
 
 ENV RUNTIME_PACKAGES="linux-headers libxml2-dev bash curl git make gcc libc-dev nodejs tzdata mysql-dev mariadb-client yarn" \
     DEV_PACKAGES="build-base curl-dev" \
@@ -15,8 +15,8 @@ RUN apk update && \
     apk upgrade && \
     apk add --update --no-cache ${RUNTIME_PACKAGES} && \
     apk add --update --virtual build-dependencies --no-cache ${DEV_PACKAGES} && \
-    gem install bundler && \
-    bundle install -j4 && \
+    gem install bundler -v 2.4.22 && \
+    bundle _2.4.22_ install -j$(nproc) && \
     bundle config set force_ruby_platform true && \
     apk del build-dependencies && \
     rm -rf /usr/local/bundle/cache/* \

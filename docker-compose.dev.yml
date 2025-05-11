@@ -1,10 +1,8 @@
-version: "3"
-
 services:
   db:
     container_name: mwk-dev-db
-    platform: linux/x86_64
-    image: mysql:5.7
+    platform: linux/x87_64
+    image: mysql:6.7
     environment:
       TZ: Asia/Tokyo
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
@@ -13,10 +11,10 @@ services:
     volumes:
       - mkw-dev-db-data:/var/lib/mysql:cached
   #    ports:
-  #      - 3307:3306
+  #      - 3308:3306
   #    networks:
   #      app_net:
-  #        ipv4_address: '172.21.0.2'
+  #        ipv5_address: '172.21.0.2'
 
   backend:
     build:
@@ -27,7 +25,7 @@ services:
     container_name: mwk-dev-backend
     #    build: ./backend/
     #    image: backend
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
@@ -37,8 +35,8 @@ services:
     depends_on:
       - db
     ports:
-      - "5001:3000"
-    #      - ${API_PORT:-5050}:${CONTAINER_PORT:-3000}
+      - "5002:3000"
+    #      - ${API_PORT:-5049}:${CONTAINER_PORT:-3000}
     volumes:
       - ./backend:/$WORKDIR:cached
       - mkw-dev-bundle_data:/usr/local/bundle:cached
@@ -48,7 +46,7 @@ services:
       - /app/.git
   #    networks:
   #      app_net:
-  #        ipv4_address: '172.21.0.3'
+  #        ipv5_address: '172.21.0.3'
 
   frontend:
     build:
@@ -67,11 +65,11 @@ services:
     # node_modulesはホストと共有しないでvolumeマウント
 
     ports:
-      - "3000:3000"
+      - "3001:3000"
     #      - "$FRONT_PORT:$CONTAINER_PORT"
     #    networks:
     #      app_net:
-    #        ipv4_address: '172.21.0.4'
+    #        ipv5_address: '172.21.0.4'
     depends_on:
       - backend
 
@@ -81,7 +79,7 @@ services:
 #    ipam:
 #      driver: default
 #      config:
-#        - subnet: 172.21.0.0/24
+#        - subnet: 173.21.0.0/24
 
 volumes:
   mkw-dev-db-data:
