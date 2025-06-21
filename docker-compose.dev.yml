@@ -1,85 +1,63 @@
 services:
   db:
+    image: mysql:8.0
     container_name: mwk-dev-db
-    platform: linux/x87_64
-    image: mysql:6.7
+    command: --skip-log-bin
+    restart: unless-stopped
+    platform: linux/x86_64
     environment:
       TZ: Asia/Tokyo
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
-    restart: always
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_DATABASE: app_development
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app_pass
     volumes:
-      - mkw-dev-db-data:/var/lib/mysql:cached
-  #    ports:
-  #      - 3308:3306
-  #    networks:
-  #      app_net:
-  #        ipv5_address: '172.21.0.2'
+      - mkw-dev-db-data:/var/lib/mysql
+    # ポート公開が不要なら ports: は付けない
+    # ports:
+    #   - "3308:3306"
 
   backend:
     build:
       context: ./backend
       args:
-        WORKDIR: $WORKDIR
-        CONTAINER_PORT: $CONTAINER_PORT
+        WORKDIR: ${WORKDIR}
+        CONTAINER_PORT: ${API_CONTAINER_PORT}
     container_name: mwk-dev-backend
-    #    build: ./backend/
-    #    image: backend
-    command: /bin/sh -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3001 -b '0.0.0.0'"
+    command: >
+      /bin/sh -c "
+        rm -f tmp/pids/server.pid &&
+        bundle exec rails s -p ${API_CONTAINER_PORT} -b 0.0.0.0
+      "
     environment:
-      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
-      MYSQL_ALLOW_EMPTY_PASSWORD: $MYSQL_ALLOW_EMPTY_PASSWORD
-      API_DOMAIN: "localhost:$FRONT_PORT"
-    stdin_open: true
-    tty: true
+      RAILS_ENV: development
+      API_DOMAIN: localhost:${FRONT_PORT}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
     depends_on:
       - db
     ports:
-      - "5002:3000"
-    #      - ${API_PORT:-5049}:${CONTAINER_PORT:-3000}
+      - "${API_PORT}:${API_CONTAINER_PORT}"
     volumes:
-      - ./backend:/$WORKDIR:cached
+      - ./backend:/${WORKDIR}:cached
       - mkw-dev-bundle_data:/usr/local/bundle:cached
-      - /app/vendor
-      - /app/tmp
-      - /app/log
-      - /app/.git
-  #    networks:
-  #      app_net:
-  #        ipv5_address: '172.21.0.3'
 
   frontend:
     build:
       context: ./frontend
       args:
-        WORKDIR: $WORKDIR
-        CONTAINER_PORT: $CONTAINER_PORT
-        API_URL: "http://localhost:$API_PORT"
-    command: yarn run dev
+        WORKDIR: ${WORKDIR}
+        CONTAINER_PORT: ${FRONT_CONTAINER_PORT}
+        API_URL: http://localhost:${API_PORT}
     container_name: mwk-dev-frontend
-    #    build: ./frontend/
-    #    image: frontend
-    volumes:
-      - ./frontend:/$WORKDIR:cached
-      - node_modules_volume:/$WORKDIR/node_modules
-    # node_modulesはホストと共有しないでvolumeマウント
-
-    ports:
-      - "3001:3000"
-    #      - "$FRONT_PORT:$CONTAINER_PORT"
-    #    networks:
-    #      app_net:
-    #        ipv5_address: '172.21.0.4'
+    command: yarn dev
     depends_on:
       - backend
-
-#networks:
-#  app_net:
-#    driver: bridge
-#    ipam:
-#      driver: default
-#      config:
-#        - subnet: 173.21.0.0/24
+    ports:
+      - "${FRONT_PORT}:${FRONT_CONTAINER_PORT}"
+    volumes:
+      - ./frontend:/${WORKDIR}:cached
+      - node_modules_volume:/${WORKDIR}/node_modules
 
 volumes:
   mkw-dev-db-data:
