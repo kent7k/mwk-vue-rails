@@ -256,7 +256,7 @@ export default {
         },
       }
       this.$axios
-        .post('api/v1/posts', formData, config)
+        .post('/api/v1/posts', formData, config)
         .then((res) => {
           console.log(res)
           console.log('Success')

@@ -68,15 +68,15 @@ export default {
     }),
   },
   created() {
-    this.$axios.get('api/v1/users').then((res) => {
+    this.$axios.get('/api/v1/users').then((res) => {
       console.log(res.data)
       this.users = res.data
     })
-    this.$axios.get('api/v1/allpost').then((res) => {
+    this.$axios.get('/api/v1/allpost').then((res) => {
       console.log(res.data)
       this.posts = res.data
     })
-    this.$axios.get('api/v1/messages').then((res) => {
+    this.$axios.get('/api/v1/messages').then((res) => {
       console.log(res.data)
       this.messages = res.data
     })

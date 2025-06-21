@@ -24,7 +24,7 @@ export const actions = {
       data: '',
     }
     await this.$axios
-      .get('api/v1/posts')
+      .get('/api/v1/posts')
       .then((res) => {
         posts.data = res.data
         commit('setPosts', posts)

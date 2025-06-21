@@ -87,7 +87,7 @@ export default {
     },
     pickup(id) {
       this.$axios
-        .post('api/v1/pickups', {
+        .post('/api/v1/pickups', {
           post_id: id,
         })
         .then((res) => {

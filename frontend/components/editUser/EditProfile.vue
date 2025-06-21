@@ -31,7 +31,7 @@ export default {
       formData.append('name', this.name)
       formData.append('profile', this.profile)
       await this.$axios
-        .put('api/v1/auth', formData, {
+        .put('/api/v1/auth', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

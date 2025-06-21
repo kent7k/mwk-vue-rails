@@ -53,7 +53,7 @@ export default {
   methods: {
     changeUserPassword() {
       this.$axios
-        .put('api/v1/auth/password', this.pas, {
+        .put('/api/v1/auth/password', this.pas, {
           headers: {
             'access-token': localStorage.getItem('access-token'),
             uid: localStorage.getItem('uid'),

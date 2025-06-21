@@ -62,7 +62,7 @@ export default {
     resSearch() {
       if (this.search === '投稿' && this.searchForm) {
         this.$axios
-          .$get('api/v1/posts/search', {
+          .$get('/api/v1/posts/search', {
             params: {
               search: this.searchForm,
             },
@@ -75,7 +75,7 @@ export default {
           })
       } else if (this.search === 'ユーザー' && this.searchForm) {
         this.$axios
-          .$get('api/v1/users/search', {
+          .$get('/api/v1/users/search', {
             params: {
               search: this.searchForm,
             },
