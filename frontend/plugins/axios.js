@@ -1,5 +1,4 @@
 export default function ({ $axios, redirect }) {
-  // ---------- リクエスト ----------
   $axios.onRequest((config) => {
     // SSR 中は window が無いのでガード
     if (process.client) {
@@ -24,11 +23,7 @@ export default function ({ $axios, redirect }) {
     return config
   })
 
-  // ---------- レスポンス ----------
   $axios.onResponse((response) => {
-    // CORS ヘッダをクライアント側で付けても無意味なので削除
-    // $axios.setHeader('Access-Control-Allow-Origin', '*')  ←不要
-
     if (process.client && response.headers.client) {
       localStorage.setItem('access-token', response.headers['access-token'])
       localStorage.setItem('client',       response.headers.client)

@@ -3,7 +3,6 @@ FROM ruby:2.7.8-alpine AS base
 ARG BUNDLER_VERSION=2.4.22
 ENV LANG=C.UTF-8 TZ=Asia/Tokyo
 
-# 必要パッケージを一括で入れる
 RUN apk add --no-cache \
       build-base curl-dev linux-headers \
       bash curl git make gcc libc-dev \
