@@ -3,11 +3,30 @@
 #### Qiita：ゼロからAWS/Terraform/Nuxt.js/Rubyを学習し始めると、ポートフォリオのリリースまでにどのような過程を踏むことになるのか？（ https://qiita.com/wonderglot/items/cf0d4faa77b925960802 ）
 
 
-# 開発環境
+### 開発環境
+
 ```shell
-docker-compose -f docker-compose.dev.yml build
-docker-compose -f docker-compose.dev.yml up
-docker exec -it <container> rails db:prepare
+# 0. 念のため停止
+docker compose -f docker-compose.dev.yml down
+
+# 1. DB データを削除（必要なければスキップ）
+docker volume rm mwk-vue-rails_mkw-dev-db-data
+
+# 2. イメージをビルド（Gem 追加・パッケージ更新時もここ）
+docker compose -f docker-compose.dev.yml --env-file .env.development build
+
+# 3. まず db コンテナだけ起動（初期化を完了させる）
+docker compose -f docker-compose.dev.yml --env-file .env.development up -d db
+
+# 4. MySQL 初期化完了を待つ（ログに "ready for connections" が出れば OK）
+#    例: docker logs -f mwk-dev-db
+
+# 5. backend の DB を作成 & マイグレーション & シード
+docker compose -f docker-compose.dev.yml --env-file .env.development \
+  run --rm backend rails db:create db:migrate db:seed
+
+# 6. 残りのサービスを起動
+docker compose -f docker-compose.dev.yml --env-file .env.development up -d backend frontend
 ```
 
 ## 概要
@@ -163,4 +182,3 @@ docker exec -it <container> rails db:prepare
 * 全てのユーザーそれぞれに対する「削除」<br>
 * 全ての投稿それぞれに対する「削除 / 編集」<br>
 * 全てのメッセージそれぞれに対する「削除」<br>
-

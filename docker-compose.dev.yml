@@ -12,8 +12,13 @@ services:
       MYSQL_DATABASE: app_development
       MYSQL_USER: app
       MYSQL_PASSWORD: app_pass
+    healthcheck:                   # ── ★追加: 起動完了を検知
+      test: ["CMD-SHELL", "mysqladmin ping -uroot -p$${MYSQL_ROOT_PASSWORD} -h 127.0.0.1 --silent"]
+      interval: 5s
+      retries: 20
     volumes:
       - mkw-dev-db-data:/var/lib/mysql
+      - ./mysql-init:/docker-entrypoint-initdb.d:ro
     # ポート公開が不要なら ports: は付けない
     # ports:
     #   - "3308:3306"

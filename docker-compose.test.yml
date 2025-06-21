@@ -1,0 +1,9 @@
+services:
+  backend:
+    environment:
+      RAILS_ENV: test
+      MYSQL_ROOT_PASSWORD: ""      # dev から継承した値を空文字で潰す
+    command: bundle exec rspec
+    depends_on:
+      db:
+        condition: service_healthy # ← db が healthy になるまで待つ
