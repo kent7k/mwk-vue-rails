@@ -193,7 +193,7 @@ export default {
     this.getPosts().then(() => {
       this.loading = true
     })
-    this.$axios.get('api/v1/posts').then((res) => {
+    this.$axios.get('/api/v1/posts').then((res) => {
       this.posts = res.data
     })
     this.$axios

@@ -31,7 +31,7 @@ export default {
   methods: {
     deleteUser() {
       this.$axios
-        .delete('api/v1/auth', {
+        .delete('/api/v1/auth', {
           headers: {
             'access-token': localStorage.getItem('access-token'),
             uid: localStorage.getItem('uid'),

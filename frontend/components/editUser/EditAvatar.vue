@@ -70,7 +70,7 @@ export default {
         formData.append('image', this.editImage)
       }
       await this.$axios
-        .put('api/v1/auth', formData, {
+        .put('/api/v1/auth', formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
