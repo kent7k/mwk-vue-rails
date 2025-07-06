@@ -3,31 +3,42 @@
 #### Qiita：ゼロからAWS/Terraform/Nuxt.js/Rubyを学習し始めると、ポートフォリオのリリースまでにどのような過程を踏むことになるのか？（ https://qiita.com/wonderglot/items/cf0d4faa77b925960802 ）
 
 
+### テスト環境
+
+```shell
+# １コマンドで DB 構築＋RSpec 実行
+docker compose \
+  -f docker-compose.dev.yml \
+  -f docker-compose.test.yml \
+  run --rm backend
+```
+
 ### 開発環境
 
 ```shell
-# 0. 念のため停止
-docker compose -f docker-compose.dev.yml down
-
-# 1. DB データを削除（必要なければスキップ）
-docker volume rm mwk-vue-rails_mkw-dev-db-data
+# 1. サービスを停止しつつ、Compose ファイルで宣言された全ボリュームをまとめて消す
+docker compose -f docker-compose.dev.yml down -v
 
 # 2. イメージをビルド（Gem 追加・パッケージ更新時もここ）
-docker compose -f docker-compose.dev.yml --env-file .env.development build
+docker compose -f docker-compose.dev.yml build
 
-# 3. まず db コンテナだけ起動（初期化を完了させる）
-docker compose -f docker-compose.dev.yml --env-file .env.development up -d db
-
-# 4. MySQL 初期化完了を待つ（ログに "ready for connections" が出れば OK）
-#    例: docker logs -f mwk-dev-db
-
-# 5. backend の DB を作成 & マイグレーション & シード
-docker compose -f docker-compose.dev.yml --env-file .env.development \
-  run --rm backend rails db:create db:migrate db:seed
-
-# 6. 残りのサービスを起動
-docker compose -f docker-compose.dev.yml --env-file .env.development up -d backend frontend
+# 3. サービスを起動
+docker compose -f docker-compose.dev.yml up
 ```
+
+### 開発環境 (Post件数確認)
+
+```shell
+# backend コンテナが起動済みなら exec
+docker compose -f docker-compose.dev.yml \
+               exec backend bundle exec rails console
+# => Loading development environment (Rails 6.0.x)
+irb(main):001:0> Post.count
+#=> 12   ← 件数が出れば OK
+```
+
+
+
 
 ## 概要
 <b>子どもたちのネットワークに異年齢間の交友関係を作り出したい</b>という思いで制作。<br><br>

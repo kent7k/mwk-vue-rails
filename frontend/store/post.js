@@ -1,6 +1,8 @@
+export const namespaced = true
+
 export const state = () => ({
-  post: {},
   posts: [],
+  post: {},
 })
 export const getters = {
   post: (state) => state.post,
@@ -8,7 +10,7 @@ export const getters = {
 }
 export const mutations = {
   setPosts(state, posts) {
-    state.posts = posts.data
+    state.posts = posts
   },
   setPost(state, post) {
     state.post = post
@@ -17,21 +19,16 @@ export const mutations = {
 
 /* eslint-disable */
 export const actions = {
-  // setPost({ commit, rootState }, payload) {
-  // },
+  // 一覧取得
   async getPosts({ commit }) {
-    const posts = {
-      data: '',
-    }
-    await this.$axios
-      .get('/api/v1/posts')
-      .then((res) => {
-        posts.data = res.data
-        commit('setPosts', posts)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    const { data } = await this.$axios.get('/api/v1/posts')
+    commit('setPosts', data)
+  },
+  // 個別取得
+  async getPost({ commit }, id) {
+    if (!id) return                    // id 未定義なら呼ばない
+    const { data } = await this.$axios.get(`/api/v1/posts/${id}`)
+    commit('setPost', data)
   },
   async likePost({ commit, rootState }, authData) {
     await this.$axios

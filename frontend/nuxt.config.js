@@ -5,6 +5,8 @@ const { RAILS_GUEST_ADDRESS } = process.env
 const { RAILS_GUEST_KEY } = process.env
 const { BASE_URL } = process.env
 
+const API_PORT = process.env.API_PORT || 3101
+
 export default {
   components: [
     '@/components/admin',
@@ -66,10 +68,9 @@ export default {
   //   // }
   // },
   axios: {
-    baseURL:
-      process.env.NODE_ENV === 'production'
-        ? 'https://rinrei720.com'
-        : 'http://localhost:5001',
+    baseURL: process.env.NODE_ENV === 'production'
+      ? 'https://meetwithkids.org/api/v1'
+      : `http://localhost:${API_PORT}/api/v1`,
     // baseURL: process.env.NODE_ENV === "production" ? "https://meetwithkids.org" : "http://localhost:5001"
     // baseURL: "https://meetwithkids.org",
     // baseURL: "https://backend.meetwithkids.org",

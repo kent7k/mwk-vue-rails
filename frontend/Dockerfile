@@ -1,6 +1,8 @@
 FROM node:20-alpine3.19 AS deps
 
-WORKDIR /app
+ARG WORKDIR
+WORKDIR ${WORKDIR}
+
 COPY package.json yarn.lock ./
 RUN --mount=type=cache,target=/root/.cache/yarn \
     yarn install --frozen-lockfile
@@ -18,7 +20,7 @@ ENV NODE_OPTIONS="--openssl-legacy-provider" \
     API_URL=${API_URL}
 
 WORKDIR ${HOME}
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps ${WORKDIR}/node_modules ./node_modules
 COPY . .
 
 RUN yarn build

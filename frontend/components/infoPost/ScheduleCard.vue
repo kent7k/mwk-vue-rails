@@ -192,6 +192,7 @@ export default {
   created() {
     this.getPosts().then(() => {
       this.loading = true
+      console.log('[Vuex] posts.length =', this.$store.state.post.posts.length)
     })
     this.$axios.get('/api/v1/posts').then((res) => {
       this.posts = res.data

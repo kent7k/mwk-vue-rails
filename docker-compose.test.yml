@@ -2,8 +2,18 @@ services:
   backend:
     environment:
       RAILS_ENV: test
-      MYSQL_ROOT_PASSWORD: ""      # dev から継承した値を空文字で潰す
-    command: bundle exec rspec
+    command: >
+      bash -c "
+        bundle exec rails db:prepare &&
+        bundle exec rspec --format documentation
+      "
     depends_on:
       db:
-        condition: service_healthy # ← db が healthy になるまで待つ
+        condition: service_healthy
+
+  db:
+    volumes:
+      - mkw-test-db-data:/var/lib/mysql   # dev DB と分離
+
+volumes:
+  mkw-test-db-data:

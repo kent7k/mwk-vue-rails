@@ -1,36 +1,28 @@
-module Api
-  module V1
-    class PostLikesController < ApplicationController
-      before_action :set_user, only: [:destroy]
+class Api::V1::PostLikesController < ApplicationController
+  before_action :authenticate_api_v1_user!   # ← API トークン必須
+  before_action :set_post
 
-      def create
-        likepost = PostLike.new(like_params)
-        if likepost.save
-          render json: @user
-        else
-          render json: { status: 400 }
-        end
-      end
+  # GET /api/v1/posts/:post_id/like
+  def show
+    liked = PostLike.exists?(user: current_api_v1_user, post: @post)
+    render json: { liked: liked }, status: :ok
+  end
 
-      def destroy
-        likepost = @user.unlike(@post)
-        if likepost.destroy
-          render json: @user
-        else
-          render json: { status: 400 }
-        end
-      end
+  # POST /api/v1/posts/:post_id/like
+  def create
+    PostLike.create!(user: current_api_v1_user, post: @post)
+    head :created
+  end
 
-      private
+  # DELETE /api/v1/posts/:post_id/like
+  def destroy
+    PostLike.find_by(user: current_api_v1_user, post: @post)&.destroy
+    head :no_content
+  end
 
-      def set_user
-        @user = User.find(params[:user_id])
-        @post = Post.find(params[:post_id])
-      end
+  private
 
-      def like_params
-        params.permit(:user_id, :post_id)
-      end
-    end
+  def set_post
+    @post = Post.find(params[:post_id])
   end
 end

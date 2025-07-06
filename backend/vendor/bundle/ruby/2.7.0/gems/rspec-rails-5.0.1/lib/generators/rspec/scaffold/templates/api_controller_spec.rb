@@ -101,7 +101,7 @@ RSpec.describe <%= controller_class_name %>Controller, <%= type_metatag(:control
       it "renders a JSON response with the <%= ns_file_name %>" do
         <%= file_name %> = <%= class_name %>.create! valid_attributes
         put :update, params: {id: <%= file_name %>.to_param, <%= ns_file_name %>: valid_attributes}, session: valid_session
-        expect(response).to have_http_status(:ok)
+        expect(response).to have_http_status(:created)
         expect(response.content_type).to eq('application/json')
       end
     end

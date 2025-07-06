@@ -1,14 +1,15 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.8'
+
+ruby '~> 3.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.3'
+gem 'rails', '~> 6.1.7', '>= 6.1.7.9'
 # Use mysql as the database for Active Record
 gem 'mysql2', '~> 0.5.6'
 # Use Puma as the app server
-gem 'puma', '5.5.0'
+gem 'puma', '~> 6.4'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -19,7 +20,7 @@ gem 'puma', '5.5.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
-gem 'ffi', '1.15.5'
+gem 'ffi', '~> 1.16'
 
 gem 'carrierwave'
 gem 'dotenv-rails'
@@ -36,7 +37,7 @@ gem 'rails_semantic_logger'
 gem 'exception_notification'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', '>= 1.18.2', require: false
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
 gem 'rack-cors'
@@ -55,13 +56,12 @@ end
 group :development do
   gem 'listen', '~> 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'rubocop'
-  gem 'rubocop-rails'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'rubocop',        '~> 1.62'
+  gem 'rubocop-rails',  '~> 2.32'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
-gem 'nio4r', '~> 2.5', '>= 2.5.9'
+gem 'bigdecimal', '~> 3.1', '>= 3.1.8'
+gem 'mutex_m',   '~> 0.2'

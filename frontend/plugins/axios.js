@@ -19,6 +19,7 @@ export default function ({ $axios, redirect }) {
         })
       }
     }
+
     config.headers['Content-Type'] = 'application/json'
     return config
   })

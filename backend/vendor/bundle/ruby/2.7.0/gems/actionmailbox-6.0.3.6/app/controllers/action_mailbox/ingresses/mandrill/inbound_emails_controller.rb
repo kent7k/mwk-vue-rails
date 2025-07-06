@@ -19,7 +19,7 @@ module ActionMailbox
 
     def create
       raw_emails.each { |raw_email| ActionMailbox::InboundEmail.create_and_extract_message_id! raw_email }
-      head :ok
+      head :created
     rescue JSON::ParserError => error
       logger.error error.message
       head :unprocessable_entity
